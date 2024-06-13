@@ -4,8 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-team',
   standalone: true,
   imports: [],
-  templateUrl: './team.component.html'
+  templateUrl: './team.component.html',
 })
 export class TeamComponent {
-
 }
