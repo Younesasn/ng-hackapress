@@ -6,7 +6,6 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('@tailwindcss/container-queries'),
-    require('flowbite/plugin'),
+    require('@tailwindcss/container-queries')
   ],
 };

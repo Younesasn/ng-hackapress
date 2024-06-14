@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,6 @@ export class AppComponent implements OnInit {
   title = 'ng-hackapress';
 
   ngOnInit(): void {
-    initFlowbite();
     document.addEventListener('DOMContentLoaded', function () {
       // open
       const burger = document.querySelectorAll('.navbar-burger');
