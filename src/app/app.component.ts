@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'ng-hackapress';
+
+  constructor(private router: Router){}
 
   ngOnInit(): void {
     document.addEventListener('DOMContentLoaded', function () {
@@ -50,5 +52,13 @@ export class AppComponent implements OnInit {
         }
       }
     });
+  }
+
+  goToHome() {
+    this.router.navigate(['/']);
+  }
+
+  goToServices(){
+    this.router.navigate(['/services'])
   }
 }

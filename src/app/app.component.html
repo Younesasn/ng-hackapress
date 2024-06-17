@@ -3,7 +3,7 @@
     class="flex max-w-screen-xl max-lg:max-w-screen-md max-md:max-w-screen-sm lg:px-6 px-3 m-auto h-20 text-black items-center"
   >
     <div class="flex">
-      <a href="/" class="text-4xl max-sm:text-3xl font-semibold">hacka'press</a>
+      <a (click)="goToHome()" class="text-4xl max-sm:text-3xl font-semibold">hacka'press</a>
     </div>
     <div class="flex-1"></div>
 
@@ -46,14 +46,14 @@
             <li>
               <a
                 class="block p-4 text-sm font-semibold text-black hover:bg-neutral-50 hover:text-neutral-600 rounded-lg transition-all"
-                href="#"
+                (click)="goToHome()" 
                 >Accueil</a
               >
             </li>
             <li>
               <a
                 class="block p-4 text-sm font-semibold text-black hover:bg-neutral-50 hover:text-neutral-600 rounded-lg transition-all"
-                href="/services"
+                (click)="goToServices()" 
                 >Services</a
               >
             </li>
@@ -101,7 +101,7 @@
       <div>
         <ul class="flex gap-3 me-4">
           <li><a href="">Accueil</a></li>
-          <li><a href="/services">Services</a></li>
+          <li><a (click)="goToServices()">Services</a></li>
           <li><a href="">Produits</a></li>
           <li><a href="">Contact</a></li>
         </ul>
@@ -115,7 +115,7 @@
       </div>
     </div>
   </header>
-  <!-- Breakpoints -->
+  
   <div
     class="flex items-center m-2 fixed bottom-0 right-0 border border-black rounded p-2 bg-black text-white text-sm"
   >
@@ -229,66 +229,4 @@
       </div>
     </section>
   </footer>
-  <!-- <footer class="bg-black text-white">
-    <section class="flex max-w-screen-xl lg:px-6 px-3 m-auto">
-      <div class="border-white border-b-2 flex py-12 space-x-12">
-        <div class="space-y-4">
-          <a href="/" class="text-4xl font-semibold">hacka'press</a>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci
-            nihil commodi architecto iusto.
-          </p>
-          <div class="flex space-x-4">
-            <a href="/" class=""><img src="../assets/svg/yt.svg" alt="" /></a>
-            <a href="/" class=""
-              ><img src="../assets/svg/tweeter.svg" alt=""
-            /></a>
-            <a href="/" class=""
-              ><img src="../assets/svg/insta.svg" alt=""
-            /></a>
-          </div>
-        </div>
-        <div class="space-y-4">
-          <h2 class="text-2xl">Navigation</h2>
-          <ul class="space-y-2">
-            <li>Accueil</li>
-            <li>Services</li>
-            <li>Produits</li>
-            <li>Contact</li>
-          </ul>
-        </div>
-        <div class="space-y-4">
-          <h2 class="text-2xl">Services</h2>
-          <ul class="space-y-2">
-            <li>Service</li>
-            <li>Service</li>
-            <li>Service</li>
-            <li>Service</li>
-          </ul>
-        </div>
-        <div class="space-y-4">
-          <h2 class="text-2xl">Contactez-nous</h2>
-          <ul class="space-y-2">
-            <li>
-              Our Support and Sales team is available 24 /7 to answer your
-              queries
-            </li>
-            <li>123 Main St, Suite 500, New York, NY 10001</li>
-            <li>06 06 06 06 06</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    <section class="flex max-w-screen-xl lg:px-6 px-3 m-auto py-4 text-xs">
-      <div class="flex space-x-2">
-        <p class="border-white border-e-2 pe-2">COPYRIGHT © 2024 YOU-DEV</p>
-        <p>DESIGN BY YOU-DEV</p>
-      </div>
-      <div class="flex-1"></div>
-      <div class="flex space-x-2">
-        <p class="border-white border-e-2 pe-2">TERM OF USE</p>
-        <p>PRIVACY POLICY</p>
-      </div>
-    </section>
-  </footer> -->
 </main>
