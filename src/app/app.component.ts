@@ -1,10 +1,13 @@
+import { initFlowbite } from 'flowbite';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
@@ -13,6 +16,10 @@ export class AppComponent implements OnInit {
   constructor(private router: Router){}
 
   ngOnInit(): void {
+
+    initFlowbite();
+
+    // Menu Burger
     document.addEventListener('DOMContentLoaded', function () {
       // open
       const burger = document.querySelectorAll('.navbar-burger');
@@ -52,13 +59,5 @@ export class AppComponent implements OnInit {
         }
       }
     });
-  }
-
-  goToHome() {
-    this.router.navigate(['/']);
-  }
-
-  goToServices(){
-    this.router.navigate(['/services'])
   }
 }
