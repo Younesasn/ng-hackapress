@@ -13,14 +13,14 @@ export class CardComponent {
 
   plus() {
     if(this.count > 4) {
-      console.log('non')
+      throw new Error('Quantité maximale atteinte')
     } else {
       this.count++;
     }
   }
   moins() {
     if (this.count < 1) {
-      console.log('non');
+      throw new Error('Quantité minimale atteinte')
     } else {
       this.count--;
     }
