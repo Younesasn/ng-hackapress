@@ -75,7 +75,9 @@ export interface Service {
 export interface ServiceCategory {
   id: number;
   name: string;
-  services: Service[];
+  services: String[];
+  startPrice: number;
+  description: string;
   employees: Employee[];
 }
 

@@ -6,7 +6,7 @@
       <div class="space-y-6">
         <div class="flex space-x-4 justify-center">
           <img src="../../../assets/svg/star.svg" alt="" />
-          <p class="text-sm">TARIFICATION</p>
+          <p class="text-sm">TARIFICATIONS</p>
         </div>
         <div class="flex space-y-4 justify-center">
           <h2 class="text-5xl max-lg:text-4xl">Nos Services</h2>
@@ -19,67 +19,24 @@
         </div>
       </div>
       <div class="flex space-x-4 max-lg:space-y-8 max-lg:space-x-0 max-lg:grid max-lg:grid-rows-3 max-lg:justify-center">
-        <div class="bg-black text-white p-11 space-y-6 rounded-2xl md:w-[430px] lg:w-full sm:w-96">
+        <div *ngFor="let oneServiceCategory of serviceCategory" class="bg-black text-white p-11 space-y-6 rounded-2xl md:w-[430px] lg:w-full sm:w-96">
           <div class="flex space-x-4">
             <img src="../../../assets/svg/star-white.svg" alt="" />
-            <p class="text-lg font-semibold">REPASSAGE</p>
+            <p class="text-lg font-semibold">{{ oneServiceCategory.name }}</p>
           </div>
           <p class="text-2xl">
-            À partir de <span class="text-5xl max-lg:text-4xl">9.99€</span>
+            À partir de <span class="text-5xl max-lg:text-4xl">{{ oneServiceCategory.startPrice }}€</span>
           </p>
           <p class="text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-            deserunt libero ducimus sunt laboriosam placeat magni harum, facilis
-            praesentium.
+            {{ oneServiceCategory.description }}
           </p>
           <a
-            href=""
+            routerLink="services/{{ oneServiceCategory.name|lowercase }}"
             class="p-4 text-black bg-white rounded-full transition-all shadow-md hover:shadow-white/60 flex justify-center"
             >Voir +</a
           >
         </div>
         <div class="flex-1 max-lg:hidden"></div>
-
-        <div class="bg-neutral-100 text-black p-11 space-y-6 rounded-2xl md:w-[430px] lg:w-full sm:w-96">
-          <div class="flex space-x-4">
-            <img src="../../../assets/svg/star.svg" alt="" />
-            <p class="text-lg font-semibold">NETTOYAGE</p>
-          </div>
-          <p class="text-2xl">
-            À partir de <span class="text-5xl max-lg:text-4xl">11.99€</span>
-          </p>
-          <p class="text-justify text-neutral-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-            deserunt libero ducimus sunt laboriosam placeat magni harum, facilis
-            praesentium.
-          </p>
-          <a
-            href=""
-            class="p-4 text-white bg-black rounded-full transition-all shadow-md hover:shadow-black/60 flex justify-center"
-            >Voir +</a
-          >
-        </div>
-        <div class="flex-1 max-lg:hidden"></div>
-
-        <div class="bg-black text-white p-11 space-y-6 rounded-2xl md:w-[430px] lg:w-full sm:w-96">
-          <div class="flex space-x-4">
-            <img src="../../../assets/svg/star-white.svg" alt="" />
-            <p class="text-lg font-semibold">RETOUCHE</p>
-          </div>
-          <p class="text-2xl">
-            À partir de <span class="text-5xl max-lg:text-4xl">14.99€</span>
-          </p>
-          <p class="text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-            deserunt libero ducimus sunt laboriosam placeat magni harum, facilis
-            praesentium.
-          </p>
-          <a
-            href=""
-            class="p-4 text-black bg-white rounded-full transition-all shadow-md hover:shadow-white/60 flex justify-center"
-            >Voir +</a
-          >
-        </div>
       </div>
     </div>
   </div>
