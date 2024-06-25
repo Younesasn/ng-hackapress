@@ -1,126 +1,18 @@
-<div
-  class="w-80 p-4 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out"
->
-  <img
-    class="w-full h-40 object-cover rounded-t-lg"
-    alt="Card Image"
-    src="https://ikigai-groupe.fr/wp-content/uploads/2021/11/developpement-web-scaled-e1637681341452-800x400.jpeg"
-  />
-  <div class="p-4 space-y-2">
-    <h2 class="text-xl font-semibold">Repassage Simple</h2>
-    <p class="text-gray-400">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis ante
-      sit amet tellus ornare tincidunt.
-    </p>
-    <div class="flex justify-end items-center mt-4">
-      <!-- <button
-        class="bg-black hover:bg-black/80 transition-all text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-      >
-        Learn More
-      </button> -->
-      <!-- <a
-        routerLink="id"
-        class="bg-black text-white px-4 py-3 rounded-full transition-all shadow-md hover:shadow-black/60"
-        >Voir +</a
-      > -->
-      <button
-        data-modal-target="large-modal"
-        data-modal-toggle="large-modal"
-        class="block bg-black text-white px-4 py-3 rounded-full transition-all shadow-md hover:shadow-black/60"
-        type="button"
-      >
-        Voir +
-      </button>
-    </div>
-  </div>
-</div>
-
-<div
-  id="large-modal"
-  tabindex="-1"
-  aria-hidden="true"
-  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
->
-  <div class="relative p-4 w-full max-w-2xl max-h-full">
-    <!-- Modal content -->
-    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-      <!-- Modal header -->
-      <div
-        class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600"
-      >
-        <button
-          type="button"
-          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-          data-modal-hide="large-modal"
-        >
-          <svg
-            class="w-3 h-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 14"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-            />
-          </svg>
-          <span class="sr-only">Close modal</span>
-        </button>
+<div class="space-y-5 transition-all duration-300 ease-in-out hover:scale-105">
+  <a [routerLink]="[id]" class="space-y-5">
+    <img
+      src="https://placehold.co/500x300.png"
+      alt=""
+      class="d-block rounded-lg"
+    />
+    <div class="space-y-3 w-[500px]">
+      <h2 class="text-3xl">{{ name }}</h2>
+      <p>
+        {{ description }}
+      </p>
+      <div *ngIf="price" class="text-xl">
+        {{ price }} €
       </div>
-      <!-- Modal body -->
-      <div class="flex w-full p-5">
-        <div class="">
-          <img
-            src="https://ikigai-groupe.fr/wp-content/uploads/2021/11/developpement-web-scaled-e1637681341452-800x400.jpeg"
-            alt=""
-          />
-        </div>
-        <div class="space-y-5">
-          <h2 class="text-4xl">Repassage Simple</h2>
-          <p class="text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-            ullam quos quis corporis, quae facere perspiciatis iure laudantium
-            dicta repellat eius aliquid, nemo recusandae asperiores praesentium
-            esse velit maxime! A.
-          </p>
-          <div class="flex justify-end items-center">
-            <!-- <div class="flex space-x-5">
-              <button type="button" (click)="moins()" class="w-10 h-10 bg-black rounded-full text-white">-</button>
-              <p class="text-2xl">{{ count }}</p>
-              <button type="button" (click)="plus()" class="w-10 h-10 bg-black rounded-full text-white">+</button>
-            </div> -->
-            <button
-              type="button"
-              class="bg-black text-white px-4 py-3 rounded-full transition-all shadow-md hover:shadow-black/60"
-            >
-              Ajouter
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- Modal footer -->
-      <!-- <div
-        class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600"
-      >
-        <button
-          data-modal-hide="large-modal"
-          type="button"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          I accept
-        </button>
-        <button
-          data-modal-hide="large-modal"
-          type="button"
-          class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-        >
-          Decline
-        </button>
-      </div> -->
     </div>
-  </div>
+  </a>
 </div>

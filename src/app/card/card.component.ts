@@ -1,28 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Product, Service } from '../shared/entities';
+import { CommonModule } from '@angular/common';
+import { ButtonComponent } from "../button/button.component";
 
 @Component({
-  selector: 'app-card',
-  standalone: true,
-  imports: [RouterLink],
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.css',
+    selector: 'app-card',
+    standalone: true,
+    templateUrl: './card.component.html',
+    styleUrl: './card.component.css',
+    imports: [RouterLink, CommonModule, ButtonComponent]
 })
 export class CardComponent {
-  count: number = 0;
-
-  plus() {
-    if(this.count > 4) {
-      throw new Error('Quantité maximale atteinte')
-    } else {
-      this.count++;
-    }
-  }
-  moins() {
-    if (this.count < 1) {
-      throw new Error('Quantité minimale atteinte')
-    } else {
-      this.count--;
-    }
-  }
+  @Input() data!: Service | Product;
+  @Input() name!: string;
+  @Input() description!: string;
+  @Input() link!: string;
+  @Input() image?: string;
+  @Input() id!: number;
+  @Input() price?: number;
 }

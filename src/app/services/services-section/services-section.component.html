@@ -1,9 +1,9 @@
 <section
   class="max-w-screen-xl max-lg:max-w-screen-md max-md:max-w-screen-sm m-auto lg:px-6 px-3"
 >
-  <div class="grid grid-cols-3 gap-5 my-12">
-    <div class="" for>
-        <app-card></app-card>
+  <div class="grid grid-cols-2 gap-5 my-12">
+    <div class="" *ngFor="let service of services">
+        <app-card [name]="service.name" [description]="service.description" [image]="service.picture" [id]="service.id" [price]="service.price"></app-card>
     </div>
   </div>
 </section>
