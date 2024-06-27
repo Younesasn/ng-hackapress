@@ -18,20 +18,28 @@
           </p>
         </div>
       </div>
-      <div class="flex space-x-4 max-lg:space-y-8 max-lg:space-x-0 max-lg:grid max-lg:grid-rows-3 max-lg:justify-center">
-        <div *ngFor="let oneServiceCategory of serviceCategory" class="bg-black text-white p-11 space-y-6 rounded-2xl md:w-[430px] lg:w-full sm:w-96">
+      <div
+        class="flex space-x-4 max-lg:space-y-8 max-lg:space-x-0 max-lg:grid max-lg:grid-rows-3 max-lg:justify-center"
+      >
+        <div
+          *ngFor="let oneServiceCategory of serviceCategory"
+          class="bg-black text-white p-11 space-y-6 rounded-2xl md:w-[430px] lg:w-full sm:w-96"
+        >
           <div class="flex space-x-4">
             <img src="../../../assets/svg/star-white.svg" alt="" />
             <p class="text-lg font-semibold">{{ oneServiceCategory.name }}</p>
           </div>
           <p class="text-2xl">
-            À partir de <span class="text-5xl max-lg:text-4xl">{{ oneServiceCategory.startPrice }}€</span>
+            À partir de
+            <span class="text-5xl max-lg:text-4xl"
+              >{{ oneServiceCategory.startPrice }}€</span
+            >
           </p>
           <p class="text-justify">
             {{ oneServiceCategory.description }}
           </p>
           <a
-            routerLink="services/{{ oneServiceCategory.name|lowercase }}"
+            routerLink="services"
             class="p-4 text-black bg-white rounded-full transition-all shadow-md hover:shadow-white/60 flex justify-center"
             >Voir +</a
           >

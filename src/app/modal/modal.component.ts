@@ -1,6 +1,18 @@
-import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { Product, ProductCategory, ServiceCategory } from '../shared/entities';
+import {
+  Matter,
+  Product,
+  ProductCategory,
+  ServiceCategory,
+} from '../shared/entities';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../shared/services/product.service';
 
@@ -9,18 +21,18 @@ import { ProductService } from '../shared/services/product.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  styleUrls: ['./modal.component.css'],
 })
 export class ModalComponent implements OnChanges {
   url: string = environment.url;
   filteredProducts: Product[] = [];
   quantity: number = 1;
-  total: number = 0;
 
   @Input() name!: string;
   @Input() description!: string;
   @Input() image!: string;
   @Input() id!: number;
+  @Input() matters!: Matter[];
   @Input() price?: number;
   @Input() categories?: ServiceCategory[];
   @Input() categoryProducts?: ProductCategory[];
@@ -40,7 +52,7 @@ export class ModalComponent implements OnChanges {
   }
 
   plus() {
-    if(this.quantity < 5) {
+    if (this.quantity < 5) {
       this.quantity++;
     }
   }
@@ -53,13 +65,19 @@ export class ModalComponent implements OnChanges {
 
   onCategoryChange(event: any) {
     const selectedCategoryId = +event.target.value;
-    const selectedCategory = this.categoryProducts?.find(cat => cat.id === selectedCategoryId);
+    const selectedCategory = this.categoryProducts?.find(
+      (cat) => cat.id === selectedCategoryId
+    );
 
     if (selectedCategory && selectedCategory.products.length > 0) {
-      const productUrls = selectedCategory.products.map(productUrl => environment.url + productUrl);
-      this.productService.getProductsByUrls(productUrls).subscribe((products: Product[]) => {
-        this.filteredProducts = products;
-      });
+      const productUrls = selectedCategory.products.map(
+        (productUrl) => environment.url + productUrl
+      );
+      this.productService
+        .getProductsByUrls(productUrls)
+        .subscribe((products: Product[]) => {
+          this.filteredProducts = products;
+        });
     } else {
       this.filteredProducts = [];
     }

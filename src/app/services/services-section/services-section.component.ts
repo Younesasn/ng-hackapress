@@ -1,7 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CardComponent } from '../../card/card.component';
 import { CommonModule } from '@angular/common';
 import {
+  Matter,
   Product,
   ProductCategory,
   Service,
@@ -11,9 +12,8 @@ import { ServiceService } from '../../shared/services/service.service';
 import { Subscription } from 'rxjs';
 import { ModalComponent } from '../../modal/modal.component';
 import { ProductCategoryService } from '../../shared/services/product-category.service';
-import { ProductService } from '../../shared/services/product.service';
 import { ServiceCategoryService } from '../../shared/services/service-category.service';
-import { environment } from '../../../environments/environment.development';
+import { MatterService } from '../../shared/services/matter.service';
 
 @Component({
   selector: 'app-services-section',
@@ -27,28 +27,29 @@ export class ServicesSectionComponent implements OnInit, OnDestroy {
   productCategory: ProductCategory[] = [];
   products: Product[] = [];
   serviceCategory: ServiceCategory[] = [];
+  matters: Matter[] = [];
 
   test: string[] = [];
 
   dataServices!: Subscription;
   dataCategories!: Subscription;
-  dataProducts!: Subscription;
   dataCategoriesService!: Subscription;
+  dataMatters!: Subscription;
 
   selectedService: Service | null = null;
 
   constructor(
     private serviceService: ServiceService,
     private productCategoryService: ProductCategoryService,
-    private productService: ProductService,
-    private serviceCategoryService: ServiceCategoryService
+    private serviceCategoryService: ServiceCategoryService,
+    private matterService: MatterService
   ) {}
 
   ngOnInit(): void {
     this.fetchAllServices();
     this.fecthAllCategoriesService();
-    this.fetchAllProducts();
     this.fetchAllCategoriesProduct();
+    this.fetchAllMatters();
   }
 
   fetchAllServices() {
@@ -67,19 +68,20 @@ export class ServicesSectionComponent implements OnInit, OnDestroy {
       });
   }
 
-  fetchAllProducts() {
-    this.dataProducts = this.productService
-      .getProduct()
-      .subscribe((products: Product[]) => {
-        this.products = products;
-      });
-  }
-
   fecthAllCategoriesService(): void {
     this.dataCategoriesService = this.serviceCategoryService
       .getServiceCategory()
       .subscribe((categories: ServiceCategory[]) => {
         this.serviceCategory = categories;
+      });
+  }
+
+  fetchAllMatters(): void {
+    this.dataMatters = this.matterService
+      .getMatter()
+      .subscribe((matters: Matter[]) => {
+        this.matters = matters;
+        console.log(this.matters);
       });
   }
 
@@ -93,5 +95,8 @@ export class ServicesSectionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.dataServices.unsubscribe();
+    this.dataCategoriesService.unsubscribe();
+    this.dataCategories.unsubscribe();
+    this.dataMatters.unsubscribe();
   }
 }
