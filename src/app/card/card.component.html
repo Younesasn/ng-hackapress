@@ -1,18 +1,20 @@
-<div class="space-y-5 transition-all duration-300 ease-in-out hover:scale-105">
-  <a [routerLink]="[id]" class="space-y-5">
+<div class="group cursor-pointer">
+  <div
+    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80"
+  >
     <img
-      src="https://placehold.co/500x300.png"
-      alt=""
-      class="d-block rounded-lg"
+      [src]="url + image"
+      alt="Front of men&#039;s Basic Tee in black."
+      class="h-full w-full object-cover object-center lg:h-full lg:w-full"
     />
-    <div class="space-y-3 w-[500px]">
-      <h2 class="text-3xl">{{ name }}</h2>
-      <p>
-        {{ description }}
-      </p>
-      <div *ngIf="price" class="text-xl">
-        {{ price }} €
-      </div>
+  </div>
+  <div class="mt-4 flex justify-between">
+    <div>
+      <h3 class="text-sm text-gray-700">
+        {{ name }}
+      </h3>
+      <p class="mt-1 text-sm text-gray-500">{{ description }}</p>
     </div>
-  </a>
+    <p class="text-sm font-medium text-gray-900" *ngIf="price">{{ price }}</p>
+  </div>
 </div>

@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { Product, Service } from '../shared/entities';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from "../button/button.component";
+import { environment } from '../../environments/environment.development';
 
 @Component({
     selector: 'app-card',
@@ -12,6 +13,8 @@ import { ButtonComponent } from "../button/button.component";
     imports: [RouterLink, CommonModule, ButtonComponent]
 })
 export class CardComponent {
+  url: string = environment.url;
+
   @Input() data!: Service | Product;
   @Input() name!: string;
   @Input() description!: string;

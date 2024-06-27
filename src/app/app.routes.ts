@@ -4,6 +4,5 @@ import { ServicesComponent } from './services/services.component';
 
 export const routes: Routes = [
     {path: "services", component: ServicesComponent},
-    // {path: "services/:id", component: ServicesDetailComponent},
     {path: "", component: HomeComponent}
 ];
