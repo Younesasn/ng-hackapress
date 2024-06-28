@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,19 +17,24 @@ import {
 })
 export class LoginComponent {
   public form: FormGroup = new FormGroup({
-    email: new FormControl('', {
+    username: new FormControl('', {
       validators: [Validators.required, Validators.email],
     }),
     password: new FormControl('', {
       validators: [Validators.required],
     }),
   });
+  
+  constructor(private authService: AuthService) {}
 
   login() {
-    if (this.form.value.email === 'you@you.com' && this.form.value.password === 'you') {
-      console.log('connecté !');
-    } else {
-      console.log('erreur');
+    if (this.form.valid) {
+      this.authService
+        .login(this.form.value.username, this.form.value.password)
+        .subscribe((res) => {
+          localStorage.setItem('token', res.token);
+          console.log(res);
+        });
     }
   }
 }
