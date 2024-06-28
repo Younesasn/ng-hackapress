@@ -30,11 +30,7 @@ export class LoginComponent {
   login() {
     if (this.form.valid) {
       this.authService
-        .login(this.form.value.username, this.form.value.password)
-        .subscribe((res) => {
-          localStorage.setItem('token', res.token);
-          console.log(res);
-        });
+        .auth(this.form.value.username, this.form.value.password);
     }
   }
 }
