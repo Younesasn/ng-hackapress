@@ -24,19 +24,19 @@ import { MatterService } from '../../shared/services/matter.service';
 })
 export class ServicesSectionComponent implements OnInit, OnDestroy {
   services: Service[] = [];
+  selectedService: Service | null = null;
+  
   productCategory: ProductCategory[] = [];
   products: Product[] = [];
+
   serviceCategory: ServiceCategory[] = [];
   matters: Matter[] = [];
-
-  test: string[] = [];
 
   dataServices!: Subscription;
   dataCategories!: Subscription;
   dataCategoriesService!: Subscription;
   dataMatters!: Subscription;
 
-  selectedService: Service | null = null;
 
   constructor(
     private serviceService: ServiceService,

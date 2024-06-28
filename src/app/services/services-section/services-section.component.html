@@ -16,13 +16,13 @@
 
 <app-modal
   *ngIf="selectedService"
+  [type]="'service'"
   [name]="selectedService.name"
   [description]="selectedService.description"
   [image]="selectedService.picture"
   [id]="selectedService.id"
   [price]="selectedService.price"
   [categoryProducts]="productCategory"
-  [products]="products"
   [matters]="matters"
   (close)="closeModal()"
 ></app-modal>

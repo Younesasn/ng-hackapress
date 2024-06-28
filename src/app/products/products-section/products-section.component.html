@@ -16,9 +16,12 @@
 <!-- modal -->
 <app-modal
   *ngIf="selectedProduct"
+  [type]="'product'"
   [name]="selectedProduct.name"
   [description]="selectedProduct.description"
   [image]="selectedProduct.picture"
   [id]="selectedProduct.id"
+  [categoryServices]="serviceCategory"
+  [matters]="matters"
   (close)="closeModal()"
 ></app-modal>

@@ -11,11 +11,14 @@ import {
   Matter,
   Product,
   ProductCategory,
+  Service,
   ServiceCategory,
 } from '../shared/entities';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../shared/services/product.service';
+import { ServiceService } from '../shared/services/service.service';
 
+type ModalType = 'service' | 'product';
 @Component({
   selector: 'app-modal',
   standalone: true,
@@ -26,6 +29,7 @@ import { ProductService } from '../shared/services/product.service';
 export class ModalComponent implements OnChanges {
   url: string = environment.url;
   filteredProducts: Product[] = [];
+  filteredServices: Service[] = [];
   quantity: number = 1;
 
   @Input() name!: string;
@@ -34,16 +38,22 @@ export class ModalComponent implements OnChanges {
   @Input() id!: number;
   @Input() matters!: Matter[];
   @Input() price?: number;
-  @Input() categories?: ServiceCategory[];
+  @Input() categoryServices?: ServiceCategory[];
   @Input() categoryProducts?: ProductCategory[];
   @Input() products?: Product[];
+  @Input() services?: Service[];
+  @Input() type!: ModalType;
   @Output() close = new EventEmitter<void>();
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private serviceService: ServiceService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['categoryProducts']) {
       this.filteredProducts = [];
+    }
+
+    if (changes['categoryService']) {
+      this.filteredServices = [];
     }
   }
 
@@ -68,6 +78,9 @@ export class ModalComponent implements OnChanges {
     const selectedCategory = this.categoryProducts?.find(
       (cat) => cat.id === selectedCategoryId
     );
+    const selectedService = this.categoryServices?.find(
+      (cat) => cat.id === selectedCategoryId
+    );
 
     if (selectedCategory && selectedCategory.products.length > 0) {
       const productUrls = selectedCategory.products.map(
@@ -80,6 +93,19 @@ export class ModalComponent implements OnChanges {
         });
     } else {
       this.filteredProducts = [];
+    }
+
+    if (selectedService && selectedService.services.length > 0) {
+      const productUrls = selectedService.services.map(
+        (productUrl) => environment.url + productUrl
+      );
+      this.serviceService
+        .getServiceByUrls(productUrls)
+        .subscribe((services: Service[]) => {
+          this.filteredServices = services;
+        });
+    } else {
+      this.filteredServices = [];
     }
   }
 }

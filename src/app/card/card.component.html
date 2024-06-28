@@ -4,7 +4,7 @@
   >
     <img
       [src]="url + image"
-      alt="Front of men&#039;s Basic Tee in black."
+      [alt]="image"
       class="h-full w-full object-cover object-center lg:h-full lg:w-full"
     />
   </div>
@@ -15,6 +15,6 @@
       </h3>
       <p class="mt-1 text-sm text-gray-500">{{ description }}</p>
     </div>
-    <p class="text-sm font-medium text-gray-900" *ngIf="price">{{ price }}</p>
+    <p class="text-sm font-medium text-gray-900" *ngIf="price">{{ price }} €</p>
   </div>
 </div>
