@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Signal } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Observable, tap } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Observable, tap } from 'rxjs';
 })
 export class AuthService {
   private authUrl: string = environment.apiURL + '/login_check';
-  private isAuth = false;
+  private isAuth: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -21,8 +21,8 @@ export class AuthService {
     this.isAuth = false;
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('token');
+  getToken(): boolean {
+    return localStorage.getItem('token') ? true : false;
   }
 
   private login(username: string, password: string): Observable<any> {
@@ -31,9 +31,8 @@ export class AuthService {
 
   auth(username: string, password: string) {
     this.login(username, password).subscribe((res) => {
-      this.setToken(res.token);
       this.isAuth = true;
-      console.log(this.getToken());
+        this.setToken(res.token);
     });
   }
 

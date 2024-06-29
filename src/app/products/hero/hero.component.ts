@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-hero',
+  selector: 'app-hero:not(hero-products)',
   standalone: true,
   imports: [],
   templateUrl: './hero.component.html',

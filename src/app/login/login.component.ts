@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,15 +7,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
+import { Route, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public form: FormGroup = new FormGroup({
     username: new FormControl('', {
       validators: [Validators.required, Validators.email],
@@ -24,13 +24,20 @@ export class LoginComponent {
       validators: [Validators.required],
     }),
   });
-  
-  constructor(private authService: AuthService) {}
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    console.log();
+  }
 
   login() {
     if (this.form.valid) {
-      this.authService
-        .auth(this.form.value.username, this.form.value.password);
+      this.authService.auth(this.form.value.username, this.form.value.password);
+      if (this.authService.getToken()) {
+        
+        this.router.navigate(['/profile']);
+      }
     }
   }
 }

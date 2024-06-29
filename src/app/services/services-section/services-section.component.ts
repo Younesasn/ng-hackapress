@@ -81,7 +81,6 @@ export class ServicesSectionComponent implements OnInit, OnDestroy {
       .getMatter()
       .subscribe((matters: Matter[]) => {
         this.matters = matters;
-        console.log(this.matters);
       });
   }
 
