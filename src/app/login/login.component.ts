@@ -6,8 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../shared/services/auth.service';
-import { Route, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { JwtService } from '../shared/services/jwt.service';
 
 @Component({
   selector: 'app-login',
@@ -25,19 +25,16 @@ export class LoginComponent implements OnInit {
     }),
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private router: Router,
+    private decoder: JwtService
+  ) {}
 
   ngOnInit() {
     console.log();
   }
 
   login() {
-    if (this.form.valid) {
-      this.authService.auth(this.form.value.username, this.form.value.password);
-      if (this.authService.getToken()) {
-        
-        this.router.navigate(['/profile']);
-      }
-    }
+
   }
 }

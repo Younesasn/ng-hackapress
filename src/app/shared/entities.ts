@@ -7,7 +7,15 @@ export interface User {
   lastName: string;
   civility: Civility;
   address: string;
-  dayBirth: Date;
+}
+
+export interface Token {
+  email: string
+  exp: number
+  iat: number
+  roles: string[]
+  user_id: number
+  username: string
 }
 
 export interface Payment {
