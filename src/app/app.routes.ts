@@ -7,13 +7,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ProfileComponent } from './profile/profile.component';
 // import { AuthGuard } from './shared/auth.guard';
 import { RegisterComponent } from './register/register.component';
+import { CartComponent } from './cart/cart.component';
+import { authGuard } from './shared/guards/auth.guard';
 
 export const routes: Routes = [
-    {path: "profile", component: ProfileComponent},
-    {path: "login", component: LoginComponent},
-    {path: "register", component: RegisterComponent},
-    {path: "services", component: ServicesComponent},
-    {path: "products", component: ProductsComponent},
-    {path: "", component: HomeComponent},
-    {path: "**", component: PageNotFoundComponent}
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'services', component: ServicesComponent },
+  { path: 'products', component: ProductsComponent },
+  { path: 'cart', component: CartComponent },
+  { path: '', component: HomeComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];

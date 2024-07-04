@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { JwtService } from '../shared/services/jwt.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,25 +16,33 @@ import { JwtService } from '../shared/services/jwt.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-  public form: FormGroup = new FormGroup({
+  authService = inject(AuthService);
+  router = inject(Router);
+
+  form: FormGroup = new FormGroup({
     username: new FormControl('', {
-      validators: [Validators.required, Validators.email],
+      validators: [Validators.required],
     }),
     password: new FormControl('', {
       validators: [Validators.required],
     }),
   });
 
-  constructor(
-    private router: Router,
-    private decoder: JwtService
-  ) {}
+  ngOnInit() {}
 
-  ngOnInit() {
-    console.log();
-  }
-
-  login() {
-
+  onSubmit() {
+    if (this.form.valid) {
+      const { username, password } = this.form.value;
+      this.authService.login({ username, password }).subscribe(
+        (token) => {
+          console.log(token.token);
+          this.authService.saveToken(token);
+          this.router.navigate(['/profile']);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 }

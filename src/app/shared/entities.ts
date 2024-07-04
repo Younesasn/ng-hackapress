@@ -3,19 +3,44 @@ export interface User {
   email: string;
   roles: string[];
   password: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   civility: Civility;
   address: string;
 }
 
+export interface UserRegister {
+  username: string;
+  password: string;
+  firstname: string;
+  lastname: string;
+  civility: string;
+  address: string;
+}
+
+export interface ICredentials {
+  username: string;
+  password: string;
+}
+
 export interface Token {
-  email: string
-  exp: number
-  iat: number
-  roles: string[]
-  user_id: number
-  username: string
+  token: string;
+}
+
+export interface TokenDecoded {
+  exp: number;
+  iat: number;
+  roles: string[];
+  user_id: number;
+  username: string;
+} 
+
+export interface OneItem {
+  category: string;
+  product: string;
+  matter: string;
+  quantity: number;
+  price: number;
 }
 
 export interface Payment {

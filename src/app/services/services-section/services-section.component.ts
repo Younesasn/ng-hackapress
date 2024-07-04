@@ -25,7 +25,7 @@ import { MatterService } from '../../shared/services/matter.service';
 export class ServicesSectionComponent implements OnInit, OnDestroy {
   services: Service[] = [];
   selectedService: Service | null = null;
-  
+
   productCategory: ProductCategory[] = [];
   products: Product[] = [];
 
@@ -37,19 +37,18 @@ export class ServicesSectionComponent implements OnInit, OnDestroy {
   dataCategoriesService!: Subscription;
   dataMatters!: Subscription;
 
-
   constructor(
+    private matterService: MatterService,
     private serviceService: ServiceService,
     private productCategoryService: ProductCategoryService,
     private serviceCategoryService: ServiceCategoryService,
-    private matterService: MatterService
   ) {}
 
   ngOnInit(): void {
+    this.fetchAllMatters();
     this.fetchAllServices();
     this.fecthAllCategoriesService();
     this.fetchAllCategoriesProduct();
-    this.fetchAllMatters();
   }
 
   fetchAllServices() {
@@ -93,9 +92,9 @@ export class ServicesSectionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.dataServices.unsubscribe();
-    this.dataCategoriesService.unsubscribe();
-    this.dataCategories.unsubscribe();
     this.dataMatters.unsubscribe();
+    this.dataServices.unsubscribe();
+    this.dataCategories.unsubscribe();
+    this.dataCategoriesService.unsubscribe();
   }
 }

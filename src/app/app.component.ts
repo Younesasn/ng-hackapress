@@ -13,10 +13,9 @@ import { initFlowbite } from 'flowbite';
 export class AppComponent implements OnInit {
   title = 'ng-hackapress';
 
-  constructor(private router: Router){}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-
     initFlowbite();
 
     // Menu Burger

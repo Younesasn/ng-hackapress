@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../entities';
+import { User, UserRegister } from '../entities';
 
 @Injectable({
   providedIn: 'root',
@@ -20,10 +20,16 @@ export class UserService {
     return this.http.get<User>(`${this.userUrl}/${id}`);
   }
 
-  setUser(user: any): Observable<User> {
-    return this.http.post<User>(this.userUrl, user, {
-      headers: { 'Access-Control-Allow-Origin': '*' },
-    });
+  setUser(user: any) {
+    let newUser: UserRegister = {
+      username: user.username,
+      password: user.password,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      civility: `/api/civilities/${user.civility}`,
+      address: user.address,
+    }
+    return this.http.post<any>(this.userUrl, newUser);
   }
 
   updateUser(user: User): Observable<User> {

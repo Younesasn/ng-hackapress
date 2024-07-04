@@ -74,7 +74,7 @@
               <section aria-labelledby="options-heading" class="mt-10">
                 <h3 id="options-heading" class="sr-only">Product options</h3>
 
-                <form class="space-y-4" *ngIf="type === 'service'">
+                <form class="space-y-4" *ngIf="type === 'service'" [formGroup]="form" (submit)="addItem()">
                   <!-- Select Category Product -->
                   <div class="flex justify-between">
                     <div class="space-y-2">
@@ -83,6 +83,7 @@
                         id="category"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         (change)="onCategoryChange($event)"
+                        formControlName="category"
                       >
                         <option value="" disabled selected>
                           Selectionnez une catégorie
@@ -102,6 +103,7 @@
                       <select
                         id="product"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        formControlName="product"
                       >
                         <option value="" disabled selected>
                           Selectionnez un produit
@@ -122,13 +124,14 @@
                       name=""
                       id="matter"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      formControlName="matter" (change)="calculatePrice()"
                     >
                       <option value="" disabled selected>
                         Selectionnez une matière
                       </option>
                       <option
                         *ngFor="let matter of matters"
-                        [value]="matter.id"
+                        [value]="[matter.id, matter.coeff]"
                       >
                         {{ matter.name }} - x{{ matter.coeff }}
                       </option>
@@ -148,7 +151,8 @@
                         </button>
                         <input
                           type="text"
-                          [value]="quantity"
+                          [value]="quantity()"
+                          formControlName="quantity"
                           class="border-none text-center w-12"
                         />
                         <button
@@ -162,7 +166,7 @@
                     </div>
 
                     <div>
-                      <h2>Total : {{ price }} €</h2>
+                      <h2>Total : {{ evolutedPrice() }} €</h2>
                     </div>
                   </div>
 
@@ -251,7 +255,7 @@
                         </button>
                         <input
                           type="text"
-                          [value]="quantity"
+                          [value]="quantity()"
                           class="border-none text-center w-12"
                         />
                         <button

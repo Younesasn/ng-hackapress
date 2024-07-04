@@ -1,18 +1,16 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { CivilityService } from '../shared/services/civility.service';
-import { Civility } from '../shared/entities';
 import { Subscription } from 'rxjs';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../shared/services/user.service';
+import { Civility, UserRegister } from '../shared/entities';
+import { CivilityService } from '../shared/services/civility.service';
 
 @Component({
   selector: 'app-register',
@@ -24,19 +22,20 @@ export class RegisterComponent implements OnInit, OnDestroy {
   civilities: Civility[] = [];
 
   dataCivility!: Subscription;
+  feedback: string = '';
 
   public form = new FormGroup({
     address: new FormControl('', [Validators.required]),
     lastname: new FormControl('', [Validators.required]),
     civility: new FormControl('', [Validators.required]),
     firstname: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    username: new FormControl('', [Validators.required]),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(12),
-      Validators.pattern(
-        '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{12,}$'
-      ),
+      // Validators.minLength(12),
+      // Validators.pattern(
+      //   '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{12,}$'
+      // ),
     ]),
   });
 
@@ -58,11 +57,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   register() {
-    console.log(this.form.value);
     if (this.form.valid) {
-      this.userService.setUser(this.form.value).subscribe((user) => {
-        console.log(user);
-      });
+     console.log(this.form.value);
+     this.userService.setUser(this.form.value).subscribe({
+       next: () => { this.feedback = 'success'; },
+       error: () => { this.feedback = 'error'; }
+     });
+     
     }
   }
 
