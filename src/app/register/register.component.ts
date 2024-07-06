@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../shared/services/user.service';
-import { Civility, UserRegister } from '../shared/entities';
+import { Civility } from '../shared/entities';
 import { CivilityService } from '../shared/services/civility.service';
 
 @Component({
@@ -32,10 +32,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [
       Validators.required,
-      // Validators.minLength(12),
-      // Validators.pattern(
-      //   '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{12,}$'
-      // ),
+      Validators.minLength(12),
+      Validators.pattern(
+        '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{12,}$'
+      ),
     ]),
   });
 
@@ -58,12 +58,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   register() {
     if (this.form.valid) {
-     console.log(this.form.value);
-     this.userService.setUser(this.form.value).subscribe({
-       next: () => { this.feedback = 'success'; },
-       error: () => { this.feedback = 'error'; }
-     });
-     
+      console.log(this.form.value);
+      this.userService.setUser(this.form.value).subscribe({
+        next: () => {
+          this.feedback = 'success';
+        },
+        error: () => {
+          this.feedback = 'error';
+        },
+      });
     }
   }
 

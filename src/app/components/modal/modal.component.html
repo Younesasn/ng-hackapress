@@ -74,7 +74,12 @@
               <section aria-labelledby="options-heading" class="mt-10">
                 <h3 id="options-heading" class="sr-only">Product options</h3>
 
-                <form class="space-y-4" *ngIf="type === 'service'" [formGroup]="form" (submit)="addItem()">
+                <form
+                  class="space-y-4"
+                  *ngIf="type === 'service'"
+                  [formGroup]="form"
+                  (submit)="addItem()"
+                >
                   <!-- Select Category Product -->
                   <div class="flex justify-between">
                     <div class="space-y-2">
@@ -85,7 +90,7 @@
                         (change)="onCategoryChange($event)"
                         formControlName="category"
                       >
-                        <option value="" disabled selected>
+                        <option [value]="id" disabled selected>
                           Selectionnez une catégorie
                         </option>
                         <option
@@ -124,16 +129,17 @@
                       name=""
                       id="matter"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      formControlName="matter" (change)="calculatePrice()"
+                      formControlName="matter"
+                      (change)="calculatePrice()"
                     >
-                      <option value="" disabled selected>
+                      <option [value]="" disabled selected>
                         Selectionnez une matière
                       </option>
                       <option
                         *ngFor="let matter of matters"
-                        [value]="[matter.id, matter.coeff]"
+                        [value]="matter.id"
                       >
-                        {{ matter.name }} - x{{ matter.coeff }}
+                        {{ matter.name }}
                       </option>
                     </select>
                   </div>
@@ -182,7 +188,12 @@
                   <!-- Button -->
                 </form>
 
-                <form class="space-y-4" *ngIf="type === 'product'">
+                <form
+                  class="space-y-4"
+                  *ngIf="type === 'product'"
+                  [formGroup]="form"
+                  (submit)="addItem()"
+                >
                   <div class="flex justify-between">
                     <div class="space-y-2">
                       <label for="category">Catégorie</label>
@@ -190,6 +201,7 @@
                         id="category"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         (change)="onCategoryChange($event)"
+                        formControlName="category"
                       >
                         <option value="" disabled selected>
                           Selectionnez une catégorie
@@ -209,15 +221,16 @@
                       <select
                         id="product"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        formControlName="product"
                       >
                         <option value="" disabled selected>
                           Selectionnez un service
                         </option>
                         <option
                           *ngFor="let service of filteredServices"
-                          [value]="service.id"
+                          [value]="[service.id, service.price]"
                         >
-                          {{ service.name }}
+                          {{ service.name }} - {{ service.price }} €
                         </option>
                       </select>
                     </div>
@@ -229,6 +242,8 @@
                       name=""
                       id="matter"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      formControlName="matter"
+                      (change)="calculatePrice()"
                     >
                       <option value="" disabled selected>
                         Selectionnez une matière
@@ -237,7 +252,7 @@
                         *ngFor="let matter of matters"
                         [value]="matter.id"
                       >
-                        {{ matter.name }} - x{{ matter.coeff }}
+                        {{ matter.name }}
                       </option>
                     </select>
                   </div>
@@ -256,6 +271,7 @@
                         <input
                           type="text"
                           [value]="quantity()"
+                          formControlName="quantity"
                           class="border-none text-center w-12"
                         />
                         <button
@@ -269,7 +285,7 @@
                     </div>
 
                     <div>
-                      <h2>Total : {{ price }} €</h2>
+                      <h2>Total : {{ evolutedPrice() }} €</h2>
                     </div>
                   </div>
                   <div class="flex w-full items-center justify-end mt-5">
@@ -281,7 +297,6 @@
                     </button>
                   </div>
                 </form>
-
               </section>
             </div>
           </div>

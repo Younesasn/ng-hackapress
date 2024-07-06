@@ -2,7 +2,6 @@ export interface User {
   id: number;
   email: string;
   roles: string[];
-  password: string;
   firstname: string;
   lastname: string;
   civility: Civility;

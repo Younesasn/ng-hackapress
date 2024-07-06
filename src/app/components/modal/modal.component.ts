@@ -8,8 +8,9 @@ import {
   OnInit,
   signal,
   computed,
+  Signal,
 } from '@angular/core';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../../environments/environment.development';
 import {
   Matter,
   OneItem,
@@ -17,10 +18,10 @@ import {
   ProductCategory,
   Service,
   ServiceCategory,
-} from '../shared/entities';
+} from '../../shared/entities';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '../shared/services/product.service';
-import { ServiceService } from '../shared/services/service.service';
+import { ProductService } from '../../shared/services/product.service';
+import { ServiceService } from '../../shared/services/service.service';
 import {
   FormControl,
   FormGroup,
@@ -34,14 +35,13 @@ type ModalType = 'service' | 'product';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css'],
 })
 export class ModalComponent implements OnChanges, OnInit {
   url: string = environment.url;
   filteredProducts: Product[] = [];
   filteredServices: Service[] = [];
   quantity = signal<number>(1);
-  evolutedPrice = signal<number>(0);
+  evolutedPrice!: Signal<number>;
 
   public form: FormGroup = new FormGroup({
     category: new FormControl('', { validators: Validators.required }),
@@ -56,7 +56,7 @@ export class ModalComponent implements OnChanges, OnInit {
   @Input() image!: string;
   @Input() id!: number;
   @Input() matters!: Matter[];
-  @Input() price?: number;
+  @Input() price!: number;
   @Input() categoryServices?: ServiceCategory[];
   @Input() categoryProducts?: ProductCategory[];
   @Input() products?: Product[];
@@ -67,16 +67,17 @@ export class ModalComponent implements OnChanges, OnInit {
   constructor(
     private productService: ProductService,
     private serviceService: ServiceService
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit(): void {
     this.form.get('quantity')?.valueChanges.subscribe(() => {
       this.calculatePrice();
     });
+    this.evolutedPrice = computed(() => this.price * this.quantity());
 
-    this.calculatePrice();
+    if (this.type === 'product') {
+      this.form.get('price')?.setValue(0);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -86,10 +87,6 @@ export class ModalComponent implements OnChanges, OnInit {
 
     if (changes['categoryService']) {
       this.filteredServices = [];
-    }
-
-    if (changes['price']) {
-      this.calculatePrice();
     }
   }
 
@@ -111,22 +108,37 @@ export class ModalComponent implements OnChanges, OnInit {
 
   calculatePrice() {
     const basePrice = this.price || 0;
-    // const selectedMatter = this.form.get('matter')?.value;
-    // const coeff = selectedMatter ? selectedMatter[1] : 1;
-    this.evolutedPrice.set(basePrice * this.quantity());
-    // this.form.get('price')?.setValue(this.evolutedPrice);
+    this.form.get('price')?.setValue(this.evolutedPrice);
   }
 
   addItem() {
-    this.form.get('quantity')?.setValue(this.quantity);
-    this.form.get('price')?.setValue(this.evolutedPrice);
-    const item: OneItem = {
-      category: this.form.get('category')?.value,
-      product: this.form.get('product')?.value,
-      matter: this.form.get('matter')?.value,
-      quantity: this.form.get('quantity')?.value,
-      price: this.form.get('price')?.value,
+    this.form.get('quantity')?.setValue(this.quantity().valueOf());
+    this.form.get('price')?.setValue(this.evolutedPrice().valueOf());
+    let item: OneItem = {
+      category: '',
+      product: '',
+      matter: '',
+      quantity: 0,
+      price: 0,
     };
+    if (this.type === 'product') {
+      item = {
+        category: `/api/categories/${this.form.get('category')?.value}`,
+        product: `/api/services/${this.form.get('product')?.value}`,
+        matter: `/api/matters/${this.form.get('matter')?.value}`,
+        quantity: this.form.get('quantity')?.value,
+        price: this.form.get('price')?.value,
+      };
+    }
+    if (this.type === 'service') {
+      item = {
+        category: `/api/categories/${this.form.get('category')?.value}`,
+        product: `/api/products/${this.form.get('product')?.value}`,
+        matter: `/api/matters/${this.form.get('matter')?.value}`,
+        quantity: this.form.get('quantity')?.value,
+        price: this.form.get('price')?.value,
+      };
+    }
     console.log(item);
   }
 

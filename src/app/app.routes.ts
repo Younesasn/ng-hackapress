@@ -3,7 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { ServicesComponent } from './services/services.component';
 import { ProductsComponent } from './products/products.component';
 import { LoginComponent } from './login/login.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
 // import { AuthGuard } from './shared/auth.guard';
 import { RegisterComponent } from './register/register.component';

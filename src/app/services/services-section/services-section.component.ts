@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CardComponent } from '../../card/card.component';
+import { CardComponent } from '../../components/card/card.component';
 import { CommonModule } from '@angular/common';
 import {
   Matter,
@@ -10,7 +10,7 @@ import {
 } from '../../shared/entities';
 import { ServiceService } from '../../shared/services/service.service';
 import { Subscription } from 'rxjs';
-import { ModalComponent } from '../../modal/modal.component';
+import { ModalComponent } from '../../components/modal/modal.component';
 import { ProductCategoryService } from '../../shared/services/product-category.service';
 import { ServiceCategoryService } from '../../shared/services/service-category.service';
 import { MatterService } from '../../shared/services/matter.service';
@@ -41,7 +41,7 @@ export class ServicesSectionComponent implements OnInit, OnDestroy {
     private matterService: MatterService,
     private serviceService: ServiceService,
     private productCategoryService: ProductCategoryService,
-    private serviceCategoryService: ServiceCategoryService,
+    private serviceCategoryService: ServiceCategoryService
   ) {}
 
   ngOnInit(): void {

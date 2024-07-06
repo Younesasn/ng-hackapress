@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { initFlowbite } from 'flowbite';
+import { RouterOutlet } from '@angular/router';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { initFlowbite } from 'flowbite';
+import { UserService } from './shared/services/user.service';
+import { AuthService } from './shared/services/auth.service';
+import { User } from './shared/entities';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +14,31 @@ import { initFlowbite } from 'flowbite';
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'ng-hackapress';
-
-  constructor(private router: Router) {}
+  user?: User; 
+  dataUser!: Subscription;
+  userService = inject(UserService);
+  authService = inject(AuthService);
 
   ngOnInit(): void {
     initFlowbite();
+    this.getCurrentUser();
+    this.burgerMenu();
+  }
 
-    // Menu Burger
+  getCurrentUser() {
+    if (this.authService.isLogged()) {
+      let decodedToken = this.authService.getDecodedToken();
+      this.dataUser = this.userService
+        .getUserById(decodedToken.user_id)
+        .subscribe((user: User) => {
+          this.user = user;
+        });
+    }
+  }
+
+  burgerMenu() {
     document.addEventListener('DOMContentLoaded', function () {
       // open
       const burger = document.querySelectorAll('.navbar-burger');
@@ -58,5 +78,10 @@ export class AppComponent implements OnInit {
         }
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.authService.logout();
+    this.dataUser.unsubscribe();
   }
 }

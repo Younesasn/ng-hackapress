@@ -21,6 +21,7 @@
       </button>
     </div>
 
+    <!-- Responsive Menu -->
     <div class="navbar-menu relative z-50 hidden">
       <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
       <nav
@@ -83,7 +84,7 @@
           </ul>
         </div>
         <div class="mt-auto">
-          <div class="pt-6">
+          <div *ngIf="!user" class="pt-6">
             <a
               class="block px-4 py-3 mb-3 text-center font-semibold leading-none bg-neutral-100 hover:bg-neutral-200 rounded-xl transition-all"
               routerLink="/"
@@ -100,19 +101,23 @@
     </div>
 
     <div class="flex max-sm:hidden">
-      <div>
-        <ul class="flex gap-3 me-4">
-          <li><a routerLink="/">Accueil</a></li>
-          <li><a routerLink="services">Services</a></li>
-          <li><a routerLink="products">Produits</a></li>
-          <li><a routerLink="/contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="space-x-3">
-        <app-button content="S'inscrire" link="/register"></app-button>
-        <app-button content="Se connecter" link="/login"></app-button>
-        <app-button content="Panier" link="/cart"></app-button>
-      </div>
+      <ul class="flex gap-3 me-4">
+        <li><a routerLink="/">Accueil</a></li>
+        <li><a routerLink="services">Services</a></li>
+        <li><a routerLink="products">Produits</a></li>
+        <li><a routerLink="/contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="flex-1 max-sm:hidden"></div>
+
+    <div class="flex space-x-4 items-center max-sm:hidden">
+      <a routerLink="/cart">
+        <img src="assets/svg/cart.svg" alt="Cart" />
+      </a>
+      <a routerLink="/profile"
+        ><img src="assets/svg/user.svg" alt="User"
+      /></a>
     </div>
   </div>
 </header>
