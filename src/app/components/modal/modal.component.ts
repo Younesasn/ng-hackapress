@@ -111,35 +111,58 @@ export class ModalComponent implements OnChanges, OnInit {
     this.form.get('price')?.setValue(this.evolutedPrice);
   }
 
-  addItem() {
+  addServiceItem() {
     this.form.get('quantity')?.setValue(this.quantity().valueOf());
     this.form.get('price')?.setValue(this.evolutedPrice().valueOf());
-    let item: OneItem = {
-      category: '',
-      product: '',
-      matter: '',
-      quantity: 0,
-      price: 0,
+
+    if(this.form.get('category')?.value === '' || this.form.get('product')?.value === '' || this.form.get('matter')?.value === '') {
+      throw new Error('Veuillez remplir tous les champs');
+    }
+
+    let OneItem: OneItem = {
+      category: `/api/categories/${this.form.get('category')?.value}`,
+      product: `/api/products/${this.form.get('product')?.value}`,
+      matter: `/api/matters/${this.form.get('matter')?.value}`,
+      quantity: this.form.get('quantity')?.value,
+      price: this.form.get('price')?.value,
     };
-    if (this.type === 'product') {
-      item = {
-        category: `/api/categories/${this.form.get('category')?.value}`,
-        product: `/api/services/${this.form.get('product')?.value}`,
-        matter: `/api/matters/${this.form.get('matter')?.value}`,
-        quantity: this.form.get('quantity')?.value,
-        price: this.form.get('price')?.value,
-      };
+
+    // Si cart existe déjà dans le localStorage
+    if (localStorage.getItem('cart')) {
+      const items = JSON.parse(localStorage.getItem('cart')!);
+      // Vérificaation si l'item existe déjà dans le localStorage, si oui on additionne le prix et le nombre de quantité sinon on ajoute le item
+      if (items.find((item: OneItem) => item.product === OneItem.product && item.matter === OneItem.matter)) {
+        items.find((item: OneItem) => item.product === OneItem.product).quantity += OneItem.quantity;
+        items.find((item: OneItem) => item.product === OneItem.product).price += OneItem.price;
+      } else {
+        items.push(OneItem);
+      }
+      localStorage.setItem('cart', JSON.stringify(items));
+    } else {
+      localStorage.setItem('cart', JSON.stringify([OneItem]));
     }
-    if (this.type === 'service') {
-      item = {
-        category: `/api/categories/${this.form.get('category')?.value}`,
-        product: `/api/products/${this.form.get('product')?.value}`,
-        matter: `/api/matters/${this.form.get('matter')?.value}`,
-        quantity: this.form.get('quantity')?.value,
-        price: this.form.get('price')?.value,
-      };
-    }
+  }
+
+  addProductItem() {
+    this.form.get('quantity')?.setValue(this.quantity().valueOf());
+    this.form.get('price')?.setValue(this.evolutedPrice().valueOf());
+
+    let item: OneItem = {
+      category: `/api/categories/${this.form.get('category')?.value}`,
+      product: `/api/products/${this.form.get('product')?.value}`,
+      matter: `/api/matters/${this.form.get('matter')?.value}`,
+      quantity: this.form.get('quantity')?.value,
+      price: this.form.get('price')?.value,
+    };
     console.log(item);
+
+    if (localStorage.getItem('cart')) {
+      const items = JSON.parse(localStorage.getItem('cart')!);
+      items.push(item);
+      localStorage.setItem('cart', JSON.stringify(items));
+    } else {
+      localStorage.setItem('cart', JSON.stringify([item]));
+    }
   }
 
   onCategoryChange(event: any) {

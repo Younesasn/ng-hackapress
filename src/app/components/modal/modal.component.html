@@ -78,7 +78,7 @@
                   class="space-y-4"
                   *ngIf="type === 'service'"
                   [formGroup]="form"
-                  (submit)="addItem()"
+                  (submit)="addServiceItem()"
                 >
                   <!-- Select Category Product -->
                   <div class="flex justify-between">
@@ -192,7 +192,7 @@
                   class="space-y-4"
                   *ngIf="type === 'product'"
                   [formGroup]="form"
-                  (submit)="addItem()"
+                  (submit)="addProductItem()"
                 >
                   <div class="flex justify-between">
                     <div class="space-y-2">
@@ -228,7 +228,7 @@
                         </option>
                         <option
                           *ngFor="let service of filteredServices"
-                          [value]="[service.id, service.price]"
+                          [value]="service.id"
                         >
                           {{ service.name }} - {{ service.price }} €
                         </option>
