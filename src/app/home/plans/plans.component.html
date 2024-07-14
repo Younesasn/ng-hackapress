@@ -22,8 +22,8 @@
         class="flex space-x-4 max-lg:space-y-8 max-lg:space-x-0 max-lg:grid max-lg:grid-rows-3 max-lg:justify-center"
       >
         <div
-          *ngFor="let oneServiceCategory of serviceCategory"
-          class="bg-black text-white p-11 space-y-6 rounded-2xl md:w-[430px] lg:w-full sm:w-96"
+          *ngFor="let oneServiceCategory of serviceCategory; let i = index"
+          class="p-11 space-y-6 rounded-2xl md:w-[430px] lg:w-full sm:w-96 {{ i % 2 === 0 ? 'bg-black text-white' : 'bg-gray-200 text-black' }}"
         >
           <div class="flex space-x-4">
             <img src="../../../assets/svg/star-white.svg" alt="" />
@@ -40,7 +40,7 @@
           </p>
           <a
             routerLink="services"
-            class="p-4 text-black bg-white rounded-full transition-all shadow-md hover:shadow-white/60 flex justify-center"
+            class="p-4 rounded-full transition-all shadow-md flex justify-center {{ i % 2 === 0 ? 'bg-white text-black hover:shadow-white/60' : 'bg-black text-white hover:shadow-black/60' }}"
             >Voir +</a
           >
         </div>
