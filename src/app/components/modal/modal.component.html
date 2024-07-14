@@ -90,7 +90,7 @@
                         (change)="onCategoryChange($event)"
                         formControlName="category"
                       >
-                        <option [value]="id" disabled selected>
+                        <option [value]="" disabled selected>
                           Selectionnez une catégorie
                         </option>
                         <option
@@ -188,7 +188,7 @@
                   <!-- Button -->
                 </form>
 
-                <form
+                <!-- <form
                   class="space-y-4"
                   *ngIf="type === 'product'"
                   [formGroup]="form"
@@ -214,7 +214,6 @@
                         </option>
                       </select>
                     </div>
-                    <!-- Select Product -->
 
                     <div class="space-y-2">
                       <label for="product">Service</label>
@@ -296,7 +295,7 @@
                       Ajouter
                     </button>
                   </div>
-                </form>
+                </form> -->
               </section>
             </div>
           </div>
