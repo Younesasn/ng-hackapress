@@ -22,4 +22,6 @@ export class CardComponent {
   @Input() image?: string;
   @Input() id!: number;
   @Input() price?: number;
+
+  constructor() {}
 }

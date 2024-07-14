@@ -27,12 +27,18 @@ export class AuthService {
 
   isLogged(): boolean {
     const token = localStorage.getItem('token');
-    console.log(environment.url);
     if (!token) return false;
     try {
       const decoded: TokenDecoded = jwtDecode(token);
-      if (decoded.username && decoded.roles && decoded.user_id && decoded.exp && decoded.iat) return true;
-    } catch (e) {
+      if (
+        decoded.username &&
+        decoded.roles &&
+        decoded.user_id &&
+        decoded.exp &&
+        decoded.iat
+      )
+        return true;
+    } catch (e: any) {
       console.log(e);
     }
     return false;
