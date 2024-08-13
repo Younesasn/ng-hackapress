@@ -47,12 +47,12 @@
                 <p
                   class="font-normal text-lg leading-8 text-gray-400 text-center"
                 >
-                  Quantity
+                  Quantité
                 </p>
               </div>
               <div class="col-span-2">
                 <p
-                  class="font-normal text-lg leading-8 text-gray-400 text-center"
+                  class="font-normal text-lg leading-8 text-gray-400 text-end"
                 >
                   Total
                 </p>
@@ -66,9 +66,9 @@
         >
           <div class="w-full md:max-w-[126px]">
             <img
-              src="https://pagedone.io/asset/uploads/1701162850.png"
+              [src]="urlImage + item.picture"
               alt="perfume bottle image"
-              class="mx-auto"
+              class="mx-auto rounded-md"
             />
           </div>
           <div class="grid grid-cols-1 md:grid-cols-4 w-full">
