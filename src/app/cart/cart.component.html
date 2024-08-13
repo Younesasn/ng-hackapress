@@ -1,14 +1,143 @@
+<main
+  *ngIf="!cart"
+  class="grid h-screen place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8"
+>
+  <div class="text-center">
+    <h1
+      class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+    >
+      Panier vide
+    </h1>
+    <p class="mt-6 text-base leading-7 text-gray-600">
+      Vous n'avez pas encore de panier, ajoutez nos services à votre panier !
+    </p>
+    <div class="mt-10 flex items-center justify-center gap-x-6">
+      <a
+        routerLink="/services"
+        class="rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >Retour aux services</a
+      >
+    </div>
+  </div>
+</main>
+
 <section
+  *ngIf="cart"
   class="max-w-screen-xl max-lg:max-w-screen-md max-md:max-w-screen-sm lg:px-6 px-3 py-3 m-auto"
 >
   <div class="flex justify-center items-center">
     <h1 class="text-5xl font-semibold p-5">Panier</h1>
   </div>
-  <div class="flex">
+  <div *ngIf="cart" class="flex gap-6">
     <div class="flex flex-[2] w-full">
       <!-- Card -->
+
+      <div
+        class="col-span-12 xl:col-span-8 lg:pr-8 pb-8 w-full max-xl:max-w-3xl max-xl:mx-auto"
+      >
+        <div
+          class="grid grid-cols-12 mt-8 max-md:hidden pb-6 border-b border-gray-200"
+        >
+          <div class="col-span-12 md:col-span-7">
+            <p class="font-normal text-lg leading-8 text-gray-400">Service</p>
+          </div>
+          <div class="col-span-12 md:col-span-5">
+            <div class="grid grid-cols-5">
+              <div class="col-span-3">
+                <p
+                  class="font-normal text-lg leading-8 text-gray-400 text-center"
+                >
+                  Quantity
+                </p>
+              </div>
+              <div class="col-span-2">
+                <p
+                  class="font-normal text-lg leading-8 text-gray-400 text-center"
+                >
+                  Total
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngFor="let item of cart"
+          class="flex flex-col min-[500px]:flex-row min-[500px]:items-center gap-5 py-6 border-b border-gray-200 group"
+        >
+          <div class="w-full md:max-w-[126px]">
+            <img
+              src="https://pagedone.io/asset/uploads/1701162850.png"
+              alt="perfume bottle image"
+              class="mx-auto"
+            />
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-4 w-full">
+            <div class="md:col-span-2">
+              <div class="flex flex-col max-[500px]:items-center gap-3">
+                <h6 class="font-semibold text-base leading-7 text-black">
+                  {{ item.service }}
+                </h6>
+                <ul>
+                  <li class="font-normal text-base text-gray-500">
+                    {{ item.product }}
+                  </li>
+                  <li class="font-normal text-sm text-gray-500">
+                    {{ item.matter }}
+                  </li>
+                </ul>
+                <h6
+                  class="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-indigo-600"
+                >
+                  {{ item.price / item.quantity | currency : "EUR" }}
+                </h6>
+              </div>
+            </div>
+            <div
+              class="flex items-center max-[500px]:justify-center h-full max-md:mt-3 justify-center"
+            >
+              <div class="flex items-center h-full">
+                {{ item.quantity }}
+              </div>
+            </div>
+            <div
+              class="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full"
+            >
+              <p
+                class="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600"
+              >
+                {{ item.price | currency : "EUR" }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end mt-8">
+          <button
+            class="flex items-center px-5 py-3 rounded-full gap-2 border-none outline-0 group font-semibold text-lg leading-8 text-indigo-600 shadow-sm shadow-transparent transition-all duration-500 hover:text-indigo-700"
+          >
+            Add Coupon Code
+            <svg
+              class="transition-all duration-500 group-hover:translate-x-2"
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 22 22"
+              fill="none"
+            >
+              <path
+                d="M12.7757 5.5L18.3319 11.0562M18.3319 11.0562L12.7757 16.6125M18.3319 11.0562L1.83203 11.0562"
+                stroke="#4F46E5"
+                stroke-width="1.6"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="flex-[1] bg-black text-white p-9 rounded-lg text-center">
+    <div
+      class="flex-[1] h-[342px] bg-black text-white p-9 rounded-lg text-center"
+    >
       <div class="pb-2">
         <h3 class="text-xl">Résumé de votre panier</h3>
       </div>
@@ -16,22 +145,22 @@
         class="flex justify-between py-4 border-b-2 border-dashed border-white"
       >
         <p>Sous-total :</p>
-        <p>19.99 €</p>
+        <p>{{ total | currency : "EUR" }}</p>
       </div>
       <div
         class="flex justify-between py-4 border-b-2 border-dashed border-white"
       >
         <p>Frais de service :</p>
-        <p>5.99 €</p>
+        <p>{{ taxes | currency : "EUR" }}</p>
       </div>
       <div
         class="flex justify-between py-4 border-b-2 border-dashed border-white"
       >
         <p class="text-lg">Total :</p>
-        <p>24.99 €</p>
+        <p>{{ total + taxes | currency : "EUR" }}</p>
       </div>
       <a
-        href=""
+        routerLink="/payment"
         class="flex text-black py-2 mt-5 bg-white justify-center rounded-md w-full"
       >
         Paiement
