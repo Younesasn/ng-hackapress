@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../shared/services/user.service';
-import { Civility } from '../shared/entities';
+import { ApiListResponse, Civility } from '../shared/entities';
 import { CivilityService } from '../shared/services/civility.service';
 
 @Component({
@@ -19,7 +19,7 @@ import { CivilityService } from '../shared/services/civility.service';
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-  civilities: Civility[] = [];
+  civilities!: ApiListResponse<Civility>;
 
   dataCivility!: Subscription;
   feedback: string = '';

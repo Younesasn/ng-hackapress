@@ -1,3 +1,21 @@
+export interface ApiListResponse<T> {
+  '@context': string;
+  '@id': string;
+  '@type': string;
+  'hydra:totalItems': number;
+  'hydra:member': T[];
+}
+
+export interface Service {
+  id: number;
+  category: ServiceCategory;
+  name: string;
+  description: string;
+  picture: string;
+  price: number;
+  items: Item[];
+}
+
 export interface User {
   id: number;
   email: string;
@@ -32,14 +50,16 @@ export interface TokenDecoded {
   roles: string[];
   user_id: number;
   username: string;
-} 
+}
 
 export interface OneItem {
+  service: string;
   category: string;
   product: string;
   matter: string;
   quantity: number;
   price: number;
+  picture: string;
 }
 
 export interface Payment {
@@ -91,16 +111,6 @@ export interface ProductCategory {
 export interface Status {
   id: number;
   name: string;
-  items: Item[];
-}
-
-export interface Service {
-  id: number;
-  category: ServiceCategory;
-  name: string;
-  description: string;
-  picture: string;
-  price: number;
   items: Item[];
 }
 
