@@ -2,10 +2,16 @@
   <div
     class="flex max-w-screen-xl max-lg:max-w-screen-md max-md:max-w-screen-sm lg:px-6 px-3 m-auto h-20 text-black items-center"
   >
-    <div class="flex">
+    <div class="flex items-center space-x-5">
       <a routerLink="/" class="text-4xl max-sm:text-3xl font-semibold"
         >hacka'press</a
       >
+      <ul class="flex space-x-3 me-4 max-sm:hidden">
+        <li><a routerLink="/">Accueil</a></li>
+        <li><a routerLink="services">Services</a></li>
+        <!-- <li><a routerLink="products">Produits</a></li> -->
+        <li><a routerLink="/contact">Contact</a></li>
+      </ul>
     </div>
     <div class="flex-1"></div>
 
@@ -100,24 +106,13 @@
       </nav>
     </div>
 
-    <div class="flex max-sm:hidden">
-      <ul class="flex space-x-4 me-4">
-        <li><a routerLink="/">Accueil</a></li>
-        <li><a routerLink="services">Services</a></li>
-        <!-- <li><a routerLink="products">Produits</a></li> -->
-        <li><a routerLink="/contact">Contact</a></li>
-      </ul>
-    </div>
-
     <div class="flex-1 max-sm:hidden"></div>
 
     <div class="flex space-x-4 items-center max-sm:hidden">
       <a routerLink="/cart">
         <img src="assets/svg/cart.svg" alt="Cart" />
       </a>
-      <a routerLink="/profile"
-        ><img src="assets/svg/user.svg" alt="User"
-      /></a>
+      <a routerLink="/profile"><img src="assets/svg/user.svg" alt="User" /></a>
     </div>
   </div>
 </header>
