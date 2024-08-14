@@ -21,7 +21,6 @@ import {
 } from '../../shared/entities';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../shared/services/product.service';
-import { ServiceService } from '../../shared/services/service.service';
 import {
   FormControl,
   FormGroup,
@@ -29,7 +28,6 @@ import {
   Validators,
 } from '@angular/forms';
 
-type ModalType = 'service' | 'product';
 @Component({
   selector: 'app-modal',
   standalone: true,
@@ -37,11 +35,23 @@ type ModalType = 'service' | 'product';
   templateUrl: './modal.component.html',
 })
 export class ModalComponent implements OnChanges, OnInit {
-  url: string = environment.url;
+
+  urlImage: string = environment.urlImage;
   filteredProducts: Product[] = [];
-  filteredServices: Service[] = [];
   quantity = signal<number>(1);
   evolutedPrice!: Signal<number>;
+
+  @Input() name!: string;
+  @Input() description!: string;
+  @Input() image!: string;
+  @Input() id!: string;
+  @Input() matters!: Matter[];
+  @Input() price!: number;
+  @Input() categoryServices?: ServiceCategory[];
+  @Input() categoryProducts?: ProductCategory[];
+  @Input() products?: Product[];
+  @Input() services?: Service[];
+  @Output() close = new EventEmitter<void>();
 
   public form: FormGroup = new FormGroup({
     category: new FormControl('', { validators: Validators.required }),
@@ -51,22 +61,8 @@ export class ModalComponent implements OnChanges, OnInit {
     price: new FormControl(0, { validators: Validators.required }),
   });
 
-  @Input() name!: string;
-  @Input() description!: string;
-  @Input() image!: string;
-  @Input() id!: number;
-  @Input() matters!: Matter[];
-  @Input() price!: number;
-  @Input() categoryServices?: ServiceCategory[];
-  @Input() categoryProducts?: ProductCategory[];
-  @Input() products?: Product[];
-  @Input() services?: Service[];
-  @Input() type!: ModalType;
-  @Output() close = new EventEmitter<void>();
-
   constructor(
     private productService: ProductService,
-    private serviceService: ServiceService
   ) {}
 
   ngOnInit(): void {
@@ -74,19 +70,11 @@ export class ModalComponent implements OnChanges, OnInit {
       this.calculatePrice();
     });
     this.evolutedPrice = computed(() => this.price * this.quantity());
-
-    if (this.type === 'product') {
-      this.form.get('price')?.setValue(0);
-    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['categoryProducts']) {
       this.filteredProducts = [];
-    }
-
-    if (changes['categoryService']) {
-      this.filteredServices = [];
     }
   }
 
@@ -107,7 +95,6 @@ export class ModalComponent implements OnChanges, OnInit {
   }
 
   calculatePrice() {
-    const basePrice = this.price || 0;
     this.form.get('price')?.setValue(this.evolutedPrice);
   }
 
@@ -115,25 +102,40 @@ export class ModalComponent implements OnChanges, OnInit {
     this.form.get('quantity')?.setValue(this.quantity().valueOf());
     this.form.get('price')?.setValue(this.evolutedPrice().valueOf());
 
-    if(this.form.get('category')?.value === '' || this.form.get('product')?.value === '' || this.form.get('matter')?.value === '') {
+    if (
+      this.form.get('category')?.value === '' ||
+      this.form.get('product')?.value === '' ||
+      this.form.get('matter')?.value === ''
+    ) {
       throw new Error('Veuillez remplir tous les champs');
     }
 
     let OneItem: OneItem = {
-      category: `/api/categories/${this.form.get('category')?.value}`,
-      product: `/api/products/${this.form.get('product')?.value}`,
-      matter: `/api/matters/${this.form.get('matter')?.value}`,
+      service: this.id.toString(),
+      category: this.form.get('category')?.value,
+      product: this.form.get('product')?.value,
+      matter: this.form.get('matter')?.value,
       quantity: this.form.get('quantity')?.value,
       price: this.form.get('price')?.value,
+      picture: this.image,
     };
+
+    console.log({ panier: OneItem });
 
     // Si cart existe déjà dans le localStorage
     if (localStorage.getItem('cart')) {
       const items = JSON.parse(localStorage.getItem('cart')!);
-      // Vérificaation si l'item existe déjà dans le localStorage, si oui on additionne le prix et le nombre de quantité sinon on ajoute le item
-      if (items.find((item: OneItem) => item.product === OneItem.product && item.matter === OneItem.matter)) {
-        items.find((item: OneItem) => item.product === OneItem.product).quantity += OneItem.quantity;
-        items.find((item: OneItem) => item.product === OneItem.product).price += OneItem.price;
+      if (
+        items.find(
+          (item: OneItem) =>
+            item.product === OneItem.product && item.matter === OneItem.matter
+        )
+      ) {
+        items.find(
+          (item: OneItem) => item.product === OneItem.product
+        ).quantity += OneItem.quantity;
+        items.find((item: OneItem) => item.product === OneItem.product).price +=
+          OneItem.price;
       } else {
         items.push(OneItem);
       }
@@ -141,28 +143,7 @@ export class ModalComponent implements OnChanges, OnInit {
     } else {
       localStorage.setItem('cart', JSON.stringify([OneItem]));
     }
-  }
-
-  addProductItem() {
-    this.form.get('quantity')?.setValue(this.quantity().valueOf());
-    this.form.get('price')?.setValue(this.evolutedPrice().valueOf());
-
-    let item: OneItem = {
-      category: `/api/categories/${this.form.get('category')?.value}`,
-      product: `/api/products/${this.form.get('product')?.value}`,
-      matter: `/api/matters/${this.form.get('matter')?.value}`,
-      quantity: this.form.get('quantity')?.value,
-      price: this.form.get('price')?.value,
-    };
-    console.log(item);
-
-    if (localStorage.getItem('cart')) {
-      const items = JSON.parse(localStorage.getItem('cart')!);
-      items.push(item);
-      localStorage.setItem('cart', JSON.stringify(items));
-    } else {
-      localStorage.setItem('cart', JSON.stringify([item]));
-    }
+    this.closeModal();
   }
 
   onCategoryChange(event: any) {
@@ -170,14 +151,11 @@ export class ModalComponent implements OnChanges, OnInit {
     const selectedCategory = this.categoryProducts?.find(
       (cat) => cat.id === selectedCategoryId
     );
-    const selectedService = this.categoryServices?.find(
-      (cat) => cat.id === selectedCategoryId
-    );
 
     if (selectedCategory && selectedCategory.products.length > 0) {
       const productUrls = selectedCategory.products.map(
         (productUrl) => environment.url + productUrl
-      );
+      ); 
       this.productService
         .getProductsByUrls(productUrls)
         .subscribe((products: Product[]) => {
@@ -185,19 +163,6 @@ export class ModalComponent implements OnChanges, OnInit {
         });
     } else {
       this.filteredProducts = [];
-    }
-
-    if (selectedService && selectedService.services.length > 0) {
-      const productUrls = selectedService.services.map(
-        (productUrl) => environment.url + productUrl
-      );
-      this.serviceService
-        .getServiceByUrls(productUrls)
-        .subscribe((services: Service[]) => {
-          this.filteredServices = services;
-        });
-    } else {
-      this.filteredServices = [];
     }
   }
 }

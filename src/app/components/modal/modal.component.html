@@ -41,7 +41,7 @@
               class="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5"
             >
               <img
-                [src]="url + image"
+                [src]="urlImage + '/' + image"
                 alt="Two each of gray, white, and black shirts arranged on table."
                 class="object-cover object-center"
               />
@@ -76,12 +76,11 @@
 
                 <form
                   class="space-y-4"
-                  *ngIf="type === 'service'"
                   [formGroup]="form"
                   (submit)="addServiceItem()"
                 >
                   <!-- Select Category Product -->
-                  <div class="flex justify-between">
+                  <div class="flex justify-between md:space-x-10">
                     <div class="space-y-2">
                       <label for="category">Catégorie</label>
                       <select
@@ -115,7 +114,7 @@
                         </option>
                         <option
                           *ngFor="let product of filteredProducts"
-                          [value]="product.id"
+                          [value]="product.name"
                         >
                           {{ product.name }}
                         </option>
@@ -137,7 +136,7 @@
                       </option>
                       <option
                         *ngFor="let matter of matters"
-                        [value]="matter.id"
+                        [value]="matter.name"
                       >
                         {{ matter.name }}
                       </option>
@@ -187,115 +186,6 @@
                   </div>
                   <!-- Button -->
                 </form>
-
-                <!-- <form
-                  class="space-y-4"
-                  *ngIf="type === 'product'"
-                  [formGroup]="form"
-                  (submit)="addProductItem()"
-                >
-                  <div class="flex justify-between">
-                    <div class="space-y-2">
-                      <label for="category">Catégorie</label>
-                      <select
-                        id="category"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        (change)="onCategoryChange($event)"
-                        formControlName="category"
-                      >
-                        <option value="" disabled selected>
-                          Selectionnez une catégorie
-                        </option>
-                        <option
-                          *ngFor="let categoryService of categoryServices"
-                          [value]="categoryService.id"
-                        >
-                          {{ categoryService.name }}
-                        </option>
-                      </select>
-                    </div>
-
-                    <div class="space-y-2">
-                      <label for="product">Service</label>
-                      <select
-                        id="product"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        formControlName="product"
-                      >
-                        <option value="" disabled selected>
-                          Selectionnez un service
-                        </option>
-                        <option
-                          *ngFor="let service of filteredServices"
-                          [value]="service.id"
-                        >
-                          {{ service.name }} - {{ service.price }} €
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="space-y-2">
-                    <label for="matter">Matière</label>
-                    <select
-                      name=""
-                      id="matter"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                      formControlName="matter"
-                      (change)="calculatePrice()"
-                    >
-                      <option value="" disabled selected>
-                        Selectionnez une matière
-                      </option>
-                      <option
-                        *ngFor="let matter of matters"
-                        [value]="matter.id"
-                      >
-                        {{ matter.name }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <div class="flex justify-between items-center">
-                    <div class="space-y-2">
-                      <label for="quantity">Quantité</label>
-                      <div class="flex space-x-1">
-                        <button
-                          type="button"
-                          (click)="moins()"
-                          class="h-10 w-10 bg-black text-white rounded-full transition-all shadow-md hover:shadow-black/60"
-                        >
-                          -
-                        </button>
-                        <input
-                          type="text"
-                          [value]="quantity()"
-                          formControlName="quantity"
-                          class="border-none text-center w-12"
-                        />
-                        <button
-                          type="button"
-                          (click)="plus()"
-                          class="h-10 w-10 bg-black text-white rounded-full transition-all shadow-md hover:shadow-black/60"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h2>Total : {{ evolutedPrice() }} €</h2>
-                    </div>
-                  </div>
-                  <div class="flex w-full items-center justify-end mt-5">
-                    <button
-                      type="submit"
-                      class="p-4 bg-black text-white rounded-full transition-all shadow-md hover:shadow-black/60"
-                    >
-                      Ajouter
-                    </button>
-                  </div>
-                </form> -->
               </section>
             </div>
           </div>

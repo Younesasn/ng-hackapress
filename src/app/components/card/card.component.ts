@@ -13,7 +13,7 @@ import { environment } from '../../../environments/environment.development';
     imports: [RouterLink, CommonModule, ButtonComponent]
 })
 export class CardComponent {
-  url: string = environment.url;
+  urlImage: string = environment.urlImage;
 
   @Input() data!: Service | Product;
   @Input() name!: string;
