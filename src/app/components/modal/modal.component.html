@@ -114,7 +114,7 @@
                         </option>
                         <option
                           *ngFor="let product of filteredProducts"
-                          [value]="product.name"
+                          value="/api/products/{{ product.id }}"
                         >
                           {{ product.name }}
                         </option>
@@ -136,7 +136,7 @@
                       </option>
                       <option
                         *ngFor="let matter of matters"
-                        [value]="matter.name"
+                        value="/api/matters/{{ matter.id }}"
                       >
                         {{ matter.name }}
                       </option>

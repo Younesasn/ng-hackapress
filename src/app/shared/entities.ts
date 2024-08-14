@@ -65,15 +65,17 @@ export interface OneItem {
 export interface Payment {
   id: number;
   name: string;
+  icon: string;
   orders: Order[];
 }
 
 export interface Order {
-  id: number;
+  id?: number;
   date: string;
   totalPrice: number;
-  customer: User;
-  payment: Payment;
+  customer: string;
+  payment: string;
+  items: OneItem[];
 }
 
 export interface Civility {

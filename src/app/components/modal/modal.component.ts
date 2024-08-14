@@ -44,7 +44,7 @@ export class ModalComponent implements OnChanges, OnInit {
   @Input() name!: string;
   @Input() description!: string;
   @Input() image!: string;
-  @Input() id!: string;
+  @Input() id!: number;
   @Input() matters!: Matter[];
   @Input() price!: number;
   @Input() categoryServices?: ServiceCategory[];
@@ -111,8 +111,8 @@ export class ModalComponent implements OnChanges, OnInit {
     }
 
     let OneItem: OneItem = {
-      service: this.id.toString(),
-      category: this.form.get('category')?.value,
+      service: `/api/services/${this.id}`,
+      category: `/api/categories/${this.form.get('category')?.value}`,
       product: this.form.get('product')?.value,
       matter: this.form.get('matter')?.value,
       quantity: this.form.get('quantity')?.value,

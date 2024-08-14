@@ -28,10 +28,9 @@
   <div class="flex justify-center items-center">
     <h1 class="text-5xl font-semibold p-5">Panier</h1>
   </div>
-  <div *ngIf="cart" class="flex gap-6">
+  <div *ngIf="cart" class="flex gap-6 max-lg:flex-col">
     <div class="flex flex-[2] w-full">
       <!-- Card -->
-
       <div
         class="col-span-12 xl:col-span-8 lg:pr-8 pb-8 w-full max-xl:max-w-3xl max-xl:mx-auto"
       >
@@ -51,9 +50,7 @@
                 </p>
               </div>
               <div class="col-span-2">
-                <p
-                  class="font-normal text-lg leading-8 text-gray-400 text-end"
-                >
+                <p class="font-normal text-lg leading-8 text-gray-400 text-end">
                   Total
                 </p>
               </div>
@@ -86,7 +83,7 @@
                   </li>
                 </ul>
                 <h6
-                  class="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-indigo-600"
+                  class="font-medium text-base leading-7 text-gray-600 transition-all duration-300"
                 >
                   {{ item.price / item.quantity | currency : "EUR" }}
                 </h6>
@@ -103,68 +100,57 @@
               class="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full"
             >
               <p
-                class="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600"
+                class="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300"
               >
                 {{ item.price | currency : "EUR" }}
               </p>
             </div>
           </div>
         </div>
-
-        <div class="flex items-center justify-end mt-8">
-          <button
-            class="flex items-center px-5 py-3 rounded-full gap-2 border-none outline-0 group font-semibold text-lg leading-8 text-indigo-600 shadow-sm shadow-transparent transition-all duration-500 hover:text-indigo-700"
-          >
-            Add Coupon Code
-            <svg
-              class="transition-all duration-500 group-hover:translate-x-2"
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 22 22"
-              fill="none"
-            >
-              <path
-                d="M12.7757 5.5L18.3319 11.0562M18.3319 11.0562L12.7757 16.6125M18.3319 11.0562L1.83203 11.0562"
-                stroke="#4F46E5"
-                stroke-width="1.6"
-                stroke-linecap="round"
-              />
-            </svg>
-          </button>
-        </div>
       </div>
     </div>
-    <div
-      class="flex-[1] h-[342px] bg-black text-white p-9 rounded-lg text-center"
-    >
-      <div class="pb-2">
-        <h3 class="text-xl">Résumé de votre panier</h3>
+    <div class="mt-6 w-full space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md">
+      <div class="flow-root">
+        <div
+          class="-my-3 divide-y divide-text-zinc-200 dark:divide-text-zinc-800"
+        >
+          <dl class="flex items-center justify-between gap-4 py-3">
+            <dt class="text-base font-normal text-zinc-500 dark:text-zinc-400">
+              Sous-total
+            </dt>
+            <dd class="text-base font-medium text-zinc-900 dark:text-white">
+              {{ total | currency : "EUR" }}
+            </dd>
+          </dl>
+
+          <dl class="flex items-center justify-between gap-4 py-3">
+            <dt class="text-base font-normal text-zinc-500 dark:text-zinc-400">
+              Frais de service
+            </dt>
+            <dd class="text-base font-medium text-zinc-900 dark:text-white">
+              {{ taxes | currency : "EUR" }}
+            </dd>
+          </dl>
+
+          <dl class="flex items-center justify-between gap-4 py-3">
+            <dt class="text-base font-bold text-zinc-900 dark:text-white">
+              Total
+            </dt>
+            <dd class="text-base font-bold text-zinc-900 dark:text-white">
+              {{ total + taxes | currency : "EUR" }}
+            </dd>
+          </dl>
+        </div>
       </div>
-      <div
-        class="flex justify-between py-4 border-b-2 border-dashed border-white"
-      >
-        <p>Sous-total :</p>
-        <p>{{ total | currency : "EUR" }}</p>
+
+      <div class="space-y-3">
+        <a
+          routerLink="/payment"
+          class="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
+          Paiment
+        </a>
       </div>
-      <div
-        class="flex justify-between py-4 border-b-2 border-dashed border-white"
-      >
-        <p>Frais de service :</p>
-        <p>{{ taxes | currency : "EUR" }}</p>
-      </div>
-      <div
-        class="flex justify-between py-4 border-b-2 border-dashed border-white"
-      >
-        <p class="text-lg">Total :</p>
-        <p>{{ total + taxes | currency : "EUR" }}</p>
-      </div>
-      <a
-        routerLink="/payment"
-        class="flex text-black py-2 mt-5 bg-white justify-center rounded-md w-full"
-      >
-        Paiement
-      </a>
     </div>
   </div>
 </section>
