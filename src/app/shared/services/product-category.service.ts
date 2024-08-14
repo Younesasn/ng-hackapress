@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ProductCategory } from '../entities';
+import { ApiListResponse, ProductCategory } from '../entities';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class ProductCategoryService {
 
   constructor(private http: HttpClient) {}
 
-  getProductCategory(): Observable<ProductCategory[]> {
-    return this.http.get<ProductCategory[]>(this.productCategoryUrl);
+  getProductCategory(): Observable<ApiListResponse<ProductCategory>> {
+    return this.http.get<ApiListResponse<ProductCategory>>(this.productCategoryUrl);
   }
 
   getProductCategoryById(id: number): Observable<ProductCategory> {

@@ -54,33 +54,31 @@ export class ServicesSectionComponent implements OnInit, OnDestroy {
   fetchAllServices() {
     this.dataServices = this.serviceService
       .getService()
-      .subscribe((services: Service[]) => {
-        this.services = services;
+      .subscribe((services) => {
+        this.services = services['hydra:member'];
       });
   }
 
   fetchAllCategoriesProduct() {
     this.dataCategories = this.productCategoryService
       .getProductCategory()
-      .subscribe((categories: ProductCategory[]) => {
-        this.productCategory = categories;
+      .subscribe((categories) => {
+        this.productCategory = categories['hydra:member'];
       });
   }
 
   fecthAllCategoriesService(): void {
     this.dataCategoriesService = this.serviceCategoryService
       .getServiceCategory()
-      .subscribe((categories: ServiceCategory[]) => {
-        this.serviceCategory = categories;
+      .subscribe((categories) => {
+        this.serviceCategory = categories['hydra:member'];
       });
   }
 
   fetchAllMatters(): void {
-    this.dataMatters = this.matterService
-      .getMatter()
-      .subscribe((matters: Matter[]) => {
-        this.matters = matters;
-      });
+    this.dataMatters = this.matterService.getMatter().subscribe((matters) => {
+      this.matters = matters['hydra:member'];
+    });
   }
 
   openModal(service: Service) {

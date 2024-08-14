@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CardComponent } from '../../components/card/card.component';
 import { ModalComponent } from '../../components/modal/modal.component';
 import {
@@ -62,17 +56,15 @@ export class ProductsSectionComponent implements OnInit, OnDestroy {
   fetchAllCategoriesService(): void {
     this.dataCategoriesService = this.serviceCategoryService
       .getServiceCategory()
-      .subscribe((categories: ServiceCategory[]) => {
-        this.serviceCategory = categories;
+      .subscribe((categories) => {
+        this.serviceCategory = categories['hydra:member'];
       });
   }
 
   fetchAllMatters(): void {
-    this.dataMatters = this.matterService
-      .getMatter()
-      .subscribe((matters: Matter[]) => {
-        this.matters = matters;
-      });
+    this.dataMatters = this.matterService.getMatter().subscribe((matters) => {
+      this.matters = matters['hydra:member'];
+    });
   }
 
   openModal(product: Product): void {

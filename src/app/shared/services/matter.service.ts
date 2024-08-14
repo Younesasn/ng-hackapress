@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { Matter } from '../entities';
+import { ApiListResponse, Matter } from '../entities';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,8 +12,8 @@ export class MatterService {
 
   constructor(private http: HttpClient) {}
 
-  getMatter(): Observable<Matter[]> {
-    return this.http.get<Matter[]>(this.matterUrl);
+  getMatter(): Observable<ApiListResponse<Matter>> {
+    return this.http.get<ApiListResponse<Matter>>(this.matterUrl);
   }
 
   getMatterById(id: number): Observable<Matter> {

@@ -24,8 +24,8 @@ export class PlansComponent implements OnInit, OnDestroy {
   fetchAll(): void {
     this.dataServices = this.serviceCategoryService
       .getServiceCategory()
-      .subscribe((data: ServiceCategory[]) => {
-        this.serviceCategory = data;
+      .subscribe((data) => {
+        this.serviceCategory = data['hydra:member'];
       });
   }
 

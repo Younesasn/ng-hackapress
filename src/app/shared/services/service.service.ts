@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
-import { Service } from '../entities';
+import { ApiListResponse, Service } from '../entities';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class ServiceService {
 
   constructor(private http: HttpClient) {}
 
-  getService(): Observable<Service[]> {
-    return this.http.get<Service[]>(this.serviceUrl);
+  getService(): Observable<ApiListResponse<Service>> {
+    return this.http.get<ApiListResponse<Service>>(this.serviceUrl);
   }
 
   getServiceById(id: number): Observable<Service> {
