@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Payment } from '../entities';
+import { ApiListResponse, Payment } from '../entities';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class PaymentService {
 
   constructor(private http: HttpClient) {}
 
-  getPayment(): Observable<Payment[]> {
-    return this.http.get<Payment[]>(this.paymentUrl);
+  getPayment(): Observable<ApiListResponse<Payment>> {
+    return this.http.get<ApiListResponse<Payment>>(this.paymentUrl);
   }
 
   getPaymentById(id: number): Observable<Payment> {
