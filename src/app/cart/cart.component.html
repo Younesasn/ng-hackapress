@@ -28,14 +28,14 @@
   <div class="flex justify-center items-center">
     <h1 class="text-5xl font-semibold p-5">Panier</h1>
   </div>
-  <div *ngIf="cart" class="flex gap-6 max-lg:flex-col">
+  <div *ngIf="cart" class="flex gap-6 max-lg:flex-col mt-8">
     <div class="flex flex-[2] w-full">
       <!-- Card -->
       <div
         class="col-span-12 xl:col-span-8 lg:pr-8 pb-8 w-full max-xl:max-w-3xl max-xl:mx-auto"
       >
         <div
-          class="grid grid-cols-12 mt-8 max-md:hidden pb-6 border-b border-gray-200"
+          class="grid grid-cols-12 max-md:hidden pb-6 border-b border-gray-200"
         >
           <div class="col-span-12 md:col-span-7">
             <p class="font-normal text-lg leading-8 text-gray-400">Service</p>
@@ -87,6 +87,7 @@
                 >
                   {{ item.price / item.quantity | currency : "EUR" }}
                 </h6>
+                <div class="cursor-pointer underline decoration-solid font-normal text-sm text-gray-400" (click)="deleteItem(item)">Supprimer</div>
               </div>
             </div>
             <div
@@ -147,8 +148,16 @@
         <a
           routerLink="/payment"
           class="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          *ngIf="isLogged"
         >
           Paiment
+        </a>
+        <a
+          routerLink="/login"
+          class="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          *ngIf="!isLogged"
+        >
+          Se Connecter
         </a>
       </div>
     </div>
