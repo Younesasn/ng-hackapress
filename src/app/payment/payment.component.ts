@@ -6,11 +6,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { ApiListResponse, OneItem, Order, Payment } from '../shared/entities';
-import { Subscription } from 'rxjs';
+import { Subscription, last } from 'rxjs';
 import { PaymentService } from '../shared/services/payment.service';
 import { CommonModule } from '@angular/common';
 import { OrderService } from '../shared/services/order.service';
 import { ItemService } from '../shared/services/item.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-payment',
@@ -22,10 +23,11 @@ export class PaymentComponent implements OnInit, OnDestroy {
   payments!: ApiListResponse<Payment>;
   paymentService = inject(PaymentService);
   dataPayment!: Subscription;
+  cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
   orderService = inject(OrderService);
-
   itemService = inject(ItemService);
+  authService = inject(AuthService);
 
   public form = new FormGroup({
     firstname: new FormControl('', [Validators.required]),
@@ -48,50 +50,53 @@ export class PaymentComponent implements OnInit, OnDestroy {
       });
   }
 
+  totalPriceHT(): number {
+    return this.cart.reduce(
+      (acc: number, item: OneItem) => acc + item.price,
+      0
+    );
+  }
+
+  totalPrice(): number {
+    return (
+      this.cart.reduce((acc: number, item: OneItem) => acc + item.price, 0) +
+      5.99
+    );
+  }
+
   validate() {
     if (this.form.valid) {
-      // console.log({ form: this.form.value });
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      console.log({ cart: cart });
+      const token = this.authService.getDecodedToken();
 
-      if (cart.length > 0) {
+      console.log({ cart: this.cart });
+
+      if (this.cart.length > 0) {
         const order: Order = {
           date: new Date().toISOString(),
-          totalPrice: cart.reduce(
-            (acc: number, item: OneItem) => acc + item.price + 5.99,
-            0
-          ),
-          // user courant à récup
-          customer: '/api/users/4',
+          totalPrice: this.totalPrice(),
+          customer: `/api/users/${token.user_id}`,
           payment: `/api/payments/${this.form.value.paymentMethod}` || '',
           items: [],
         };
 
-        const test = this.orderService
-          .setOrder(order)
-          .subscribe((order: Order) => {
-            console.log({ order: order.id });
-            console.log('Order created');
+        this.orderService.setOrder(order).subscribe((order: Order) => {
+          const items = this.cart.map((item: OneItem) => {
+            return {
+              command: `/api/orders/${order.id}`,
+              product: item.product,
+              matter: item.matter,
+              status: `/api/statuses/${token.status_id}`,
+              service: item.service,
+            };
+          });
 
-            const items = cart.map((item: OneItem) => {
-              return {
-                command: `/api/orders/${order.id}`,
-                product: item.product,
-                matter: item.matter,
-                // status par défaut à recup
-                status: '/api/statuses/4',
-                service: item.service,
-              };
-            });
-
-            items.forEach((item: OneItem) => {
-              this.itemService.setItem(item).subscribe((item) => {
-                console.log({ item: item });
-                console.log('Item created');
-                localStorage.removeItem('cart');
-              });
+          items.forEach((item: OneItem) => {
+            this.itemService.setItem(item).subscribe((item) => {
+              console.log('Item created');
+              localStorage.removeItem('cart');
             });
           });
+        });
       } else {
         console.log('Cart is empty');
       }

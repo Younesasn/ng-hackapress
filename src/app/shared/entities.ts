@@ -49,6 +49,7 @@ export interface TokenDecoded {
   iat: number;
   roles: string[];
   user_id: number;
+  status_id: number;
   username: string;
 }
 
