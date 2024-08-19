@@ -20,7 +20,6 @@ import { MatterService } from '../../shared/services/matter.service';
   standalone: true,
   imports: [CardComponent, CommonModule, ModalComponent],
   templateUrl: './services-section.component.html',
-  styleUrl: './services-section.component.css',
 })
 export class ServicesSectionComponent implements OnInit, OnDestroy {
   services: Service[] = [];
