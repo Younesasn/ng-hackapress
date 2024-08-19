@@ -24,6 +24,7 @@ export interface User {
   lastname: string;
   civility: Civility;
   address: string;
+  orders: string[];
 }
 
 export interface UserRegister {
@@ -53,7 +54,17 @@ export interface TokenDecoded {
   username: string;
 }
 
+export interface Item {
+  id: number; 
+  command: Order;
+  product: Product;
+  matter: Matter;
+  status: Status;
+  service: Service;
+}
+
 export interface OneItem {
+  id?: number;
   service: string;
   category: string;
   product: string;
@@ -61,6 +72,7 @@ export interface OneItem {
   quantity: number;
   price: number;
   picture: string;
+  status?: string;
 }
 
 export interface Payment {
@@ -76,22 +88,13 @@ export interface Order {
   totalPrice: number;
   customer: string;
   payment: string;
-  items: OneItem[];
+  items: string[];
 }
 
 export interface Civility {
   id: number;
   wording: string;
   users: User[];
-}
-
-export interface Item {
-  id: number;
-  command: Order;
-  product: Product;
-  matter: Matter;
-  status: Status;
-  service: Service;
 }
 
 export interface Product {
