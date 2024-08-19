@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { OrderService } from '../shared/services/order.service';
 import { ItemService } from '../shared/services/item.service';
 import { AuthService } from '../shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -28,6 +29,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   orderService = inject(OrderService);
   itemService = inject(ItemService);
   authService = inject(AuthService);
+  router = inject(Router);
 
   public form = new FormGroup({
     firstname: new FormControl('', [Validators.required]),
@@ -75,7 +77,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
           date: new Date().toISOString(),
           totalPrice: this.totalPrice(),
           customer: `/api/users/${token.user_id}`,
-          payment: `/api/payments/${this.form.value.paymentMethod}` || '',
+          payment: `/api/payments/${this.form.value.paymentMethod}`,
           items: [],
         };
 
@@ -87,16 +89,20 @@ export class PaymentComponent implements OnInit, OnDestroy {
               matter: item.matter,
               status: `/api/statuses/${token.status_id}`,
               service: item.service,
+              quantity: item.quantity,
+              picture: item.picture,
             };
           });
 
           items.forEach((item: OneItem) => {
             this.itemService.setItem(item).subscribe((item) => {
               console.log('Item created');
-              localStorage.removeItem('cart');
             });
           });
         });
+        localStorage.removeItem('cart');
+        localStorage.setItem('order', JSON.stringify(true));
+        this.router.navigate(['/validate']);
       } else {
         console.log('Cart is empty');
       }

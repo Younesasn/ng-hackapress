@@ -128,7 +128,7 @@ export class ModalComponent implements OnChanges, OnInit {
       if (
         items.find(
           (item: OneItem) =>
-            item.product === OneItem.product && item.matter === OneItem.matter
+            item.product === OneItem.product && item.matter === OneItem.matter && item.service === OneItem.service
         )
       ) {
         items.find(

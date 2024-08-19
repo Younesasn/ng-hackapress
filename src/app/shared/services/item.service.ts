@@ -16,8 +16,8 @@ export class ItemService {
     return this.http.get<OneItem[]>(this.itemUrl);
   }
 
-  getItem(id: number): Observable<OneItem> {
-    return this.http.get<OneItem>(`${this.itemUrl}/${id}`);
+  getItemByUri(uri: string): Observable<OneItem> {
+    return this.http.get<OneItem>(`${environment.url}${uri}`);
   }
 
   setItem(item: OneItem): Observable<OneItem> {
