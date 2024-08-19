@@ -7,11 +7,12 @@ import { environment } from '../../environments/environment.development';
 import { AuthService } from '../shared/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, map } from 'rxjs';
+import { ValidateComponent } from '../validate/validate.component';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ValidateComponent],
   templateUrl: './cart.component.html',
 })
 export class CartComponent implements OnInit, OnDestroy {
@@ -34,24 +35,30 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   updateCartItem() {
-    const requests = this.cart.map((item) => {
-      const matterRequest = this.http.get<any>(environment.url + item.matter);
-      const productRequest = this.http.get<any>(environment.url + item.product);
-      const serviceRequest = this.http.get<any>(environment.url + item.service);
+    if (this.cart) {
+      const requests = this.cart.map((item) => {
+        const matterRequest = this.http.get<any>(environment.url + item.matter);
+        const productRequest = this.http.get<any>(
+          environment.url + item.product
+        );
+        const serviceRequest = this.http.get<any>(
+          environment.url + item.service
+        );
 
-      return forkJoin([matterRequest, productRequest, serviceRequest]).pipe(
-        map(([matter, product, service]) => {
-          item.matter = matter.name;
-          item.product = product.name;
-          item.service = service.name;
-          return item;
-        })
-      );
-    });
+        return forkJoin([matterRequest, productRequest, serviceRequest]).pipe(
+          map(([matter, product, service]) => {
+            item.matter = matter.name;
+            item.product = product.name;
+            item.service = service.name;
+            return item;
+          })
+        );
+      });
 
-    forkJoin(requests).subscribe((updatedCart: OneItem[]) => {
-      this.cart = updatedCart;
-    });
+      forkJoin(requests).subscribe((updatedCart: OneItem[]) => {
+        this.cart = updatedCart;
+      });
+    }
   }
 
   deleteItem(item: OneItem) {
@@ -63,5 +70,10 @@ export class CartComponent implements OnInit, OnDestroy {
       localStorage.removeItem('cart');
     }
   }
+
+  close() {
+    console.log('close');
+  }
+
   ngOnDestroy(): void {}
 }
