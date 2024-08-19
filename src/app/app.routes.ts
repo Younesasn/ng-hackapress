@@ -9,6 +9,7 @@ import { CartComponent } from './cart/cart.component';
 import { authGuard } from './shared/guards/auth.guard';
 import { ContactComponent } from './contact/contact.component';
 import { PaymentComponent } from './payment/payment.component';
+import { ValidateComponent } from './validate/validate.component';
 
 export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'payment', component: PaymentComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'validate', component: ValidateComponent },
   { path: '', component: HomeComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
