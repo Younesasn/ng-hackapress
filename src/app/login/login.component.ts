@@ -18,6 +18,7 @@ import { AuthService } from '../shared/services/auth.service';
 export class LoginComponent implements OnInit {
   authService = inject(AuthService);
   router = inject(Router);
+  error: boolean = false;
 
   form: FormGroup = new FormGroup({
     username: new FormControl('', {
@@ -40,6 +41,8 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           console.log(error);
+          this.form.reset();
+          this.error = true;
           this.router.navigate(['/login']);
         }
       );
