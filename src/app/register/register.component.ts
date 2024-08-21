@@ -5,12 +5,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../shared/services/user.service';
 import { ApiListResponse, Civility } from '../shared/entities';
 import { CivilityService } from '../shared/services/civility.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -41,7 +42,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(
     private civilityService: CivilityService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -58,10 +61,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   register() {
     if (this.form.valid) {
-      console.log(this.form.value);
       this.userService.setUser(this.form.value).subscribe({
         next: () => {
           this.feedback = 'success';
+          if (this.form.value.password && this.form.value.username) {
+            const { username, password } = this.form.value;
+            this.authService.login({ username, password }).subscribe(
+              (token) => {
+                this.authService.saveToken(token);
+                this.router.navigate(['/profile']);
+              },
+              (error) => {
+                console.log(error);
+                this.router.navigate(['/login']);
+              }
+            );
+          }
         },
         error: () => {
           this.feedback = 'error';
