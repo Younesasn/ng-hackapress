@@ -9,7 +9,6 @@
       <ul class="flex space-x-3 me-4 max-sm:hidden">
         <li><a routerLink="/">Accueil</a></li>
         <li><a routerLink="services">Services</a></li>
-        <!-- <li><a routerLink="products">Produits</a></li> -->
         <li><a routerLink="/contact">Contact</a></li>
       </ul>
     </div>
@@ -66,13 +65,6 @@
                 >Services</a
               >
             </li>
-            <!-- <li>
-              <a
-                class="block p-4 text-sm font-semibold text-black hover:bg-neutral-50 hover:text-neutral-600 rounded-lg transition-all"
-                routerLink="products"
-                >Produits</a
-              >
-            </li> -->
             <li>
               <a
                 class="block p-4 text-sm font-semibold text-black hover:bg-neutral-50 hover:text-neutral-600 rounded-lg transition-all"
@@ -113,6 +105,7 @@
         <img src="assets/svg/cart.svg" alt="Cart" />
       </a>
       <a routerLink="/profile"><img src="assets/svg/user.svg" alt="User" /></a>
+      <p class="cursor-pointer" *ngIf="user" (click)="logout()"><img src="assets/svg/logout.svg" alt="Logout" /></p>
     </div>
   </div>
 </header>

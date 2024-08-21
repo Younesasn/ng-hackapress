@@ -71,9 +71,5 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   }
 
-  close() {
-    console.log('close');
-  }
-
   ngOnDestroy(): void {}
 }

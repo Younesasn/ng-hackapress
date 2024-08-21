@@ -120,8 +120,6 @@ export class ModalComponent implements OnChanges, OnInit {
       picture: this.image,
     };
 
-    console.log({ panier: OneItem });
-
     // Si cart existe déjà dans le localStorage
     if (localStorage.getItem('cart')) {
       const items = JSON.parse(localStorage.getItem('cart')!);
