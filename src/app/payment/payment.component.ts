@@ -69,9 +69,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   validate() {
     if (this.form.valid) {
       const token = this.authService.getDecodedToken();
-
-      console.log({ cart: this.cart });
-
+    
       if (this.cart.length > 0) {
         const order: Order = {
           date: new Date().toISOString(),
@@ -95,9 +93,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
           });
 
           items.forEach((item: OneItem) => {
-            this.itemService.setItem(item).subscribe((item) => {
-              console.log('Item created');
-            });
+            this.itemService.setItem(item).subscribe();
           });
         });
         localStorage.removeItem('cart');
