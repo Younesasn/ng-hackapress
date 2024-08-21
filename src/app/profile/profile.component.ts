@@ -8,11 +8,12 @@ import { CommonModule } from '@angular/common';
 import { ItemService } from '../shared/services/item.service';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit, OnDestroy {
@@ -25,14 +26,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
   user!: User;
   dataUser!: Subscription;
   orders: Order[] = [];
+  hasOrders: boolean = false;
   token = this.authService.getDecodedToken();
   urlImage = environment.urlImage;
 
   dataModal: OneItem[] = [];
+  orderId: number | undefined;
 
   ngOnInit() {
     this.getDataUser();
-    console.log({ orders: this.orders });
+    console.log({hasOrders: this.hasOrders});
   }
 
   getDataUser() {
@@ -43,20 +46,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
         data.orders.forEach((order) => {
           this.orderService.getOrderByUri(order).subscribe((data: Order) => {
             this.orders.push(data);
+            this.hasOrders = true;
           });
         });
       });
   }
 
-  openModal(items: string[], id: number) {
+  openModal(items: string[], id: number | undefined) {
     const currentItems = this.dataModal.map((item) => item);
     const newItems = items;
 
     if (JSON.stringify(currentItems) !== JSON.stringify(newItems)) {
       this.dataModal = [];
+      this.orderId = undefined;
       items.forEach((item: string) => {
         this.itemService.getItemByUri(item).subscribe((data: OneItem) => {
           this.dataModal.push(data);
+          this.orderId = id;
 
           const requests = this.dataModal.map((item) => {
             const matterRequest = this.http.get<any>(
@@ -90,6 +96,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
           forkJoin(requests).subscribe((updatedCart: OneItem[]) => {
             this.dataModal = updatedCart;
+            this.orderId = id;
           });
         });
       });
