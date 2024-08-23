@@ -53,6 +53,9 @@ importers:
       jwt-decode:
         specifier: ^4.0.0
         version: 4.0.0
+      ngx-countup:
+        specifier: ^13.2.0
+        version: 13.2.0(@angular/common@18.0.5(@angular/core@18.0.5(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.5(rxjs@7.8.1)(zone.js@0.14.7))
       rxjs:
         specifier: ~7.8.1
         version: 7.8.1
@@ -2200,6 +2203,9 @@ packages:
       typescript:
         optional: true
 
+  countup.js@2.8.0:
+    resolution: {integrity: sha512-f7xEhX0awl4NOElHulrl4XRfKoNH3rB+qfNSZZyjSZhaAoUk6elvhH+MNxMmlmuUJ2/QNTWPSA7U4mNtIAKljQ==}
+
   critters@0.0.22:
     resolution: {integrity: sha512-NU7DEcQZM2Dy8XTKFHxtdnIM/drE312j2T4PCVaSUcS0oBeyT/NImpRw/Ap0zOr/1SE7SgPK9tGPg1WK/sVakw==}
 
@@ -3290,6 +3296,12 @@ packages:
 
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
+
+  ngx-countup@13.2.0:
+    resolution: {integrity: sha512-8HpLinaRAg9qta8P/1BjP7IzVY8USNbn9981StlvYPNshLwZcmSmxKJIuHzE9zTL+y7ILWih2L4SDyJDfsIyVw==}
+    peerDependencies:
+      '@angular/common': '>=13.0.0'
+      '@angular/core': '>=13.0.0'
 
   nice-napi@1.0.2:
     resolution: {integrity: sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA==}
@@ -7182,6 +7194,8 @@ snapshots:
     optionalDependencies:
       typescript: 5.4.5
 
+  countup.js@2.8.0: {}
+
   critters@0.0.22:
     dependencies:
       chalk: 4.1.2
@@ -8367,6 +8381,13 @@ snapshots:
   negotiator@0.6.3: {}
 
   neo-async@2.6.2: {}
+
+  ngx-countup@13.2.0(@angular/common@18.0.5(@angular/core@18.0.5(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.5(rxjs@7.8.1)(zone.js@0.14.7)):
+    dependencies:
+      '@angular/common': 18.0.5(@angular/core@18.0.5(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1)
+      '@angular/core': 18.0.5(rxjs@7.8.1)(zone.js@0.14.7)
+      countup.js: 2.8.0
+      tslib: 2.6.3
 
   nice-napi@1.0.2:
     dependencies:

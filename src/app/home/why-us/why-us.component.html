@@ -1,18 +1,25 @@
 <section>
-  <div class="max-w-screen-xl max-lg:max-w-screen-md max-md:max-w-screen-sm m-auto h-[1000px] lg:px-6 px-3 flex items-center">
+  <div
+    class="max-w-screen-xl max-lg:max-w-screen-md max-md:max-w-screen-sm m-auto h-[1000px] lg:px-6 px-3 flex items-center"
+  >
     <div class="grid grid-cols-2 max-lg:grid-cols-1 items-center">
-      <img src="../../../assets/images/chaise.png" alt="" class="rounded-2xl max-lg:hidden" />
+      <img
+        src="../../../assets/images/chaise.png"
+        alt=""
+        class="rounded-2xl max-lg:hidden"
+      />
       <div class="space-y-5">
         <div class="flex space-x-4">
-          <img src="../../../assets/svg/star.svg" alt="">
+          <img src="../../../assets/svg/star.svg" alt="" />
           <p class="text-sm">POURQUOI NOUS ?</p>
         </div>
         <h2 class="text-5xl max-lg:text-4xl">
           Offrir des Services de
-          <span class="text-neutral-500">Nettoyage</span> Amicaux et Fiables
+          <span class="text-neutral-500">{{ displayedText }}</span> Amicaux et
+          Fiables
         </h2>
         <p>
-          Desservant plus de <span class="text-neutral-500">4 000</span> clients
+          Desservant plus de <span class="text-neutral-500" [countUp]="4000"></span> clients
           par mois.
         </p>
         <div class="flex space-x-4 items-start">
@@ -20,22 +27,22 @@
           <div class="space-y-3">
             <h3 class="text-2xl max-lg:text-xl">Service de haute qualité</h3>
             <p class="text-justify">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Repudiandae quis quae recusandae dolor dolorem dolore modi earum
-              cupiditate magni, illum ratione reprehenderit necessitatibus
-              blanditiis suscipit perferendis architecto perspiciatis et ipsa.
+              Nous nous engageons à fournir un service impeccable
+              pour chaque article, en utilisant des techniques de pointe et des
+              équipements modernes. Que vous ayez besoin de repasser des
+              chemises de travail ou des vêtements délicats, notre attention aux
+              détails garantit un résultat soigné à chaque fois.
             </p>
           </div>
         </div>
         <div class="flex space-x-4 items-start">
           <img src="../../../assets/svg/arrow.svg" alt="" class="mt-[5px]" />
           <div class="space-y-3">
-            <h3 class="text-2xl max-lg:text-xl">Personnel formé et professionnel</h3>
+            <h3 class="text-2xl max-lg:text-xl">
+              Personnel formé et professionnel
+            </h3>
             <p class="text-justify">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Repudiandae quis quae recusandae dolor dolorem dolore modi earum
-              cupiditate magni, illum ratione reprehenderit necessitatibus
-              blanditiis suscipit perferendis architecto perspiciatis et ipsa.
+              Notre équipe de professionnels qualifiés est formée pour traiter tous types de tissus avec le plus grand soin. Chaque membre de notre personnel s'engage à offrir un service rapide et précis, tout en veillant à la satisfaction complète de nos clients.
             </p>
           </div>
         </div>
@@ -44,10 +51,7 @@
           <div class="space-y-3">
             <h3 class="text-2xl max-lg:text-xl">Service Client Exceptionnel</h3>
             <p class="text-justify">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Repudiandae quis quae recusandae dolor dolorem dolore modi earum
-              cupiditate magni, illum ratione reprehenderit necessitatibus
-              blanditiis suscipit perferendis architecto perspiciatis et ipsa.
+              Votre satisfaction est notre priorité. Notre service client est disponible pour répondre à toutes vos questions et s'assurer que votre expérience avec nous soit des plus agréables. Nous nous efforçons de dépasser vos attentes à chaque étape du processus, du dépôt à la livraison.
             </p>
           </div>
         </div>

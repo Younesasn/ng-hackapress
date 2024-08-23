@@ -27,11 +27,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CountUpModule } from 'ngx-countup';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, CountUpModule],
   templateUrl: './modal.component.html',
 })
 export class ModalComponent implements OnChanges, OnInit {

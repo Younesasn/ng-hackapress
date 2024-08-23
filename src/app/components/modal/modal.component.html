@@ -63,11 +63,7 @@
                   A partir de {{ price }} €
                 </p>
                 <p class="text-sm">
-                  {{ description }} ipsum dolor sit amet consectetur adipisicing
-                  elit. Impedit perspiciatis nulla ipsa inventore neque deserunt
-                  nihil sit quia velit quam expedita numquam, doloremque
-                  voluptates soluta reprehenderit reiciendis praesentium nostrum
-                  amet.
+                  {{ description }}
                 </p>
               </section>
 
@@ -170,8 +166,8 @@
                       </div>
                     </div>
 
-                    <div>
-                      <h2>Total : {{ evolutedPrice() }} €</h2>
+                    <div class="flex justify-between space-x-1">
+                      <span>Total : </span><h2 [countUp]="evolutedPrice()"></h2><span> €</span>
                     </div>
                   </div>
 
