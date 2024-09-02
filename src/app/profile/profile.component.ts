@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getDataUser();
-    console.log({hasOrders: this.hasOrders});
+    // console.log({hasOrders: this.hasOrders});
   }
 
   getDataUser() {
