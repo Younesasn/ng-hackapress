@@ -6,8 +6,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
+import { filter } from 'rxjs';
+import { NavigationService } from '../shared/services/navigation.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
   authService = inject(AuthService);
   router = inject(Router);
   error: boolean = false;
+  navigationService = inject(NavigationService);
 
   form: FormGroup = new FormGroup({
     username: new FormControl('', {
@@ -29,7 +32,9 @@ export class LoginComponent implements OnInit {
     }),
   });
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.navigationService.getCurrentUrl());
+  }
 
   onSubmit() {
     if (this.form.valid) {

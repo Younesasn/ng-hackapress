@@ -54,13 +54,13 @@ export class ModalComponent implements OnChanges, OnInit {
   @Input() services?: Service[];
   @Output() close = new EventEmitter<void>();
 
-  public form: FormGroup = new FormGroup({
-    category: new FormControl('', { validators: Validators.required }),
-    product: new FormControl('', { validators: Validators.required }),
-    matter: new FormControl('', { validators: Validators.required }),
-    quantity: new FormControl(1, { validators: Validators.required }),
-    price: new FormControl(0, { validators: Validators.required }),
-  });
+public form: FormGroup = new FormGroup({
+  category: new FormControl('', { validators: Validators.required }),
+  product: new FormControl('', { validators: Validators.required }),
+  matter: new FormControl('', { validators: Validators.required }),
+  quantity: new FormControl(1, { validators: Validators.required }),
+  price: new FormControl(0, { validators: Validators.required }),
+});
 
   constructor(
     private productService: ProductService,
