@@ -6,16 +6,6 @@ export interface ApiListResponse<T> {
   'hydra:member': T[];
 }
 
-export interface Service {
-  id: number;
-  category: ServiceCategory;
-  name: string;
-  description: string;
-  picture: string;
-  price: number;
-  items: Item[];
-}
-
 export interface User {
   id: number;
   email: string;
@@ -85,6 +75,7 @@ export interface Payment {
 export interface Order {
   id?: number;
   date: string;
+  deposit?: string;
   totalPrice: number;
   customer: string;
   payment: string;
@@ -112,6 +103,16 @@ export interface ProductCategory {
   parent: ProductCategory;
   productsCategories: ProductCategory[];
   products: Product[];
+}
+
+export interface Service {
+  id: number;
+  category: ServiceCategory;
+  name: string;
+  description: string;
+  picture: string;
+  price: number;
+  items: Item[];
 }
 
 export interface Status {

@@ -38,9 +38,13 @@ export class PaymentComponent implements OnInit, OnDestroy {
     email: new FormControl('', [Validators.required]),
     address: new FormControl('', [Validators.required]),
     paymentMethod: new FormControl('', [Validators.required]),
+    deposit: new FormControl('', [Validators.required]),
   });
 
   ngOnInit(): void {
+    if(!localStorage.getItem('cart')){
+      this.router.navigate(['/cart']);
+    }
     this.fetchPayments();
   }
 
@@ -76,6 +80,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
           totalPrice: this.totalPrice(),
           customer: `/api/users/${token.user_id}`,
           payment: `/api/payments/${this.form.value.paymentMethod}`,
+          deposit: this.form.value.deposit?.toString(),
           items: [],
         };
 
