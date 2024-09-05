@@ -8,7 +8,7 @@ import { Observable, forkJoin } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductService {
-  private productUrl: string = `${environment.apiURL}/products`;
+  private productUrl: string = `${environment.apiUrl}/products`;
 
   constructor(private http: HttpClient) {}
 
@@ -16,29 +16,8 @@ export class ProductService {
     return this.http.get<Product[]>(this.productUrl);
   }
 
-  // getProductsByUrls(urls: string[]): Observable<Product[]> {
-  //   const requests: Observable<Product>[] = urls.map(url => this.http.get<Product>(url));
-  //   return forkJoin(requests);
-  // }
-
   getProductsByUrls(urls: string[]): Observable<Product[]> {
     const requests: Observable<Product>[] = urls.map(url => this.http.get<Product>(url));
     return forkJoin(requests);
-  }
-
-  getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.productUrl}/${id}`);
-  }
-
-  setProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.productUrl, product);
-  }
-
-  updateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.productUrl}/${product.id}`, product);
-  }
-
-  deleteProduct(id: number): Observable<Product> {
-    return this.http.delete<Product>(`${this.productUrl}/${id}`);
   }
 }

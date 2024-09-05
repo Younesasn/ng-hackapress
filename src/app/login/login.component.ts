@@ -6,9 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
-import { filter } from 'rxjs';
 import { NavigationService } from '../shared/services/navigation.service';
 
 @Component({

@@ -10,7 +10,7 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root',
 })
 export class AuthService {
-  url: string = `${environment.apiURL}/login_check`;
+  url: string = `${environment.apiUrl}/login_check`;
   http = inject(HttpClient);
   router = inject(Router);
 

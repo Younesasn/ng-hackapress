@@ -8,13 +8,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ItemService {
-  private itemUrl: string = `${environment.apiURL}/items`;
+  private itemUrl: string = `${environment.apiUrl}/items`;
 
   constructor(private http: HttpClient) {}
-
-  getItems(): Observable<OneItem[]> {
-    return this.http.get<OneItem[]>(this.itemUrl);
-  }
 
   getItemByUri(uri: string): Observable<OneItem> {
     return this.http.get<OneItem>(`${environment.url}${uri}`);
@@ -22,13 +18,5 @@ export class ItemService {
 
   setItem(item: OneItem): Observable<OneItem> {
     return this.http.post<OneItem>(this.itemUrl, item);
-  }
-
-  // updateItem(item: OneItem): Observable<OneItem> {
-  //   return this.http.put<OneItem>(`${this.itemUrl}/${item.id}`, item);
-  // }
-
-  deleteItem(id: number): Observable<OneItem> {
-    return this.http.delete<OneItem>(`${this.itemUrl}/${id}`);
   }
 }

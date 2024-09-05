@@ -8,27 +8,11 @@ import { ApiListResponse, ProductCategory } from '../entities';
   providedIn: 'root'
 })
 export class ProductCategoryService {
-  private productCategoryUrl: string = `${environment.apiURL}/product_categories`;
+  private productCategoryUrl: string = `${environment.apiUrl}/product_categories`;
 
   constructor(private http: HttpClient) {}
 
   getProductCategory(): Observable<ApiListResponse<ProductCategory>> {
     return this.http.get<ApiListResponse<ProductCategory>>(this.productCategoryUrl);
-  }
-
-  getProductCategoryById(id: number): Observable<ProductCategory> {
-    return this.http.get<ProductCategory>(`${this.productCategoryUrl}/${id}`);
-  }
-
-  setProductCategory(productCategory: ProductCategory): Observable<ProductCategory> {
-    return this.http.post<ProductCategory>(this.productCategoryUrl, productCategory);
-  }
-
-  updateProductCategory(productCategory: ProductCategory): Observable<ProductCategory> {
-    return this.http.put<ProductCategory>(`${this.productCategoryUrl}/${productCategory.id}`, productCategory);
-  }
-
-  deleteProductCategory(id: number): Observable<ProductCategory> {
-    return this.http.delete<ProductCategory>(`${this.productCategoryUrl}/${id}`);
   }
 }

@@ -8,13 +8,9 @@ import { Order } from '../entities';
   providedIn: 'root',
 })
 export class OrderService {
-  private orderUrl: string = `${environment.apiURL}/orders`;
+  private orderUrl: string = `${environment.apiUrl}/orders`;
 
   constructor(private http: HttpClient) {}
-
-  getOrder(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.orderUrl);
-  }
 
   getOrderByUri(uri: string): Observable<Order> {
     return this.http.get<Order>(`${environment.url}${uri}`);
@@ -22,9 +18,5 @@ export class OrderService {
 
   setOrder(order: Order): Observable<Order> {
     return this.http.post<Order>(this.orderUrl, order);
-  }
-
-  deleteOrder(id: number): Observable<Order> {
-    return this.http.delete<Order>(`${this.orderUrl}/${id}`);
   }
 }

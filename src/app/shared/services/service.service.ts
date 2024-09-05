@@ -8,7 +8,7 @@ import { ApiListResponse, Service } from '../entities';
   providedIn: 'root'
 })
 export class ServiceService {
-  private serviceUrl: string = `${environment.apiURL}/services`;
+  private serviceUrl: string = `${environment.apiUrl}/services`;
 
   constructor(private http: HttpClient) {}
 
@@ -16,24 +16,8 @@ export class ServiceService {
     return this.http.get<ApiListResponse<Service>>(this.serviceUrl);
   }
 
-  getServiceById(id: number): Observable<Service> {
-    return this.http.get<Service>(`${this.serviceUrl}/${id}`);
-  }
-
   getServiceByUrls(urls: string[]): Observable<Service[]> {
     const requests: Observable<Service>[] = urls.map(url => this.http.get<Service>(url));
     return forkJoin(requests);
-  }
-
-  setService(service: Service): Observable<Service> {
-    return this.http.post<Service>(this.serviceUrl, service);
-  }
-
-  updateService(service: Service): Observable<Service> {
-    return this.http.put<Service>(`${this.serviceUrl}/${service.id}`, service);
-  }
-
-  deleteService(id: number): Observable<Service> {
-    return this.http.delete<Service>(`${this.serviceUrl}/${id}`);
   }
 }

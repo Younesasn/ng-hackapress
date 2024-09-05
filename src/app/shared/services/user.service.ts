@@ -8,17 +8,9 @@ import { User, UserRegister } from '../entities';
   providedIn: 'root',
 })
 export class UserService {
-  private userUrl: string = `${environment.apiURL}/users`;
+  private userUrl: string = `${environment.apiUrl}/users`;
 
   constructor(private http: HttpClient) {}
-
-  getUser(): Observable<User[]> {
-    return this.http.get<User[]>(this.userUrl);
-  }
-
-  getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.userUrl}/${id}`);
-  }
 
   setUser(user: any) {
     let newUser: UserRegister = {
@@ -32,11 +24,7 @@ export class UserService {
     return this.http.post<any>(this.userUrl, newUser);
   }
 
-  updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.userUrl}/${user.id}`, user);
-  }
-
-  deleteUser(id: number): Observable<User> {
-    return this.http.delete<User>(`${this.userUrl}/${id}`);
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.userUrl}/${id}`);
   }
 }
