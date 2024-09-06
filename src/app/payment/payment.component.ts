@@ -90,7 +90,6 @@ export class PaymentComponent implements OnInit, OnDestroy {
               command: `/api/orders/${order.id}`,
               product: item.product,
               matter: item.matter,
-              status: `/api/statuses/${token.status_id}`,
               service: item.service,
               quantity: item.quantity,
               picture: item.picture,
