@@ -12,9 +12,9 @@ export interface User {
   roles: string[];
   firstname: string;
   lastname: string;
-  civility: Civility;
+  civility: string;
   address: string;
-  orders: string[];
+  orders: Order[];
 }
 
 export interface UserRegister {
@@ -40,17 +40,19 @@ export interface TokenDecoded {
   iat: number;
   roles: string[];
   user_id: number;
-  status_id: number;
   username: string;
 }
 
 export interface Item {
   id: number; 
+  service: Service;
+  picture: string;
+  quantity: number;
+  price: number;
   command: Order;
   product: Product;
   matter: Matter;
   status: Status;
-  service: Service;
 }
 
 export interface OneItem {
@@ -79,7 +81,7 @@ export interface Order {
   totalPrice: number;
   customer: string;
   payment: string;
-  items: string[];
+  items: Item[];
 }
 
 export interface Civility {
