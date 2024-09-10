@@ -3,7 +3,7 @@ import { OneItem, Service } from '../shared/entities';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../shared/services/cart.service';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { AuthService } from '../shared/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, map } from 'rxjs';
