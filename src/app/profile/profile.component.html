@@ -136,7 +136,7 @@
       <div
         class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
       >
-        <div class="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
+        <div class="absolute top-0 right-0 pt-4 pr-4 block">
           <button
             type="button"
             (click)="closeModal()"
@@ -182,7 +182,7 @@
               </div>
               <div class="grid grid-cols-1 md:grid-cols-4 w-full">
                 <div class="md:col-span-2">
-                  <div class="flex flex-col max-[500px]:items-center gap-3">
+                  <div class="flex flex-col max-[500px]:items-center gap-3 max-sm:text-center">
                     <h6 class="font-semibold text-base leading-7 text-black">
                       {{ item.service.name }}
                     </h6>
