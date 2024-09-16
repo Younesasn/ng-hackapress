@@ -1,25 +1,53 @@
 <header class="sticky top-0 bg-white shadow-lg">
-  <div
-    class="flex max-w-screen-xl max-lg:max-w-screen-md max-md:max-w-screen-sm lg:px-6 px-3 m-auto h-20 text-black items-center"
-  >
-    <div class="flex items-center space-x-5">
+  <nav class="bg-white border-gray-200">
+    <div
+      class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+    >
       <a routerLink="/" class="text-4xl max-sm:text-3xl font-semibold"
         >hacka'press</a
       >
-      <ul class="flex space-x-3 me-4">
-        <li><a routerLink="/">Accueil</a></li>
-        <li><a routerLink="services">Services</a></li>
-      </ul>
+      <button
+        data-collapse-toggle="navbar-default"
+        type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+        aria-controls="navbar-default"
+        aria-expanded="false"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          class="w-5 h-5"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 17 14"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M1 1h15M1 7h15M1 13h15"
+          />
+        </svg>
+      </button>
+      <div class="hidden w-full md:flex md:w-auto md:ms-5" id="navbar-default">
+        <ul
+          class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white"
+        >
+          <li><a routerLink="/" class="block py-2 px-3 rounded md:bg-transparent md:p-0 max-md:hover:bg-black max-md:hover:text-white transition-all">Accueil</a></li>
+          <li><a routerLink="/services" class="block py-2 px-3 rounded md:bg-transparent md:p-0 max-md:hover:bg-black max-md:hover:text-white transition-all">Services</a></li>
+          <li><a routerLink="/cart" class="md:hidden block py-2 px-3 rounded md:bg-transparent md:p-0 max-md:hover:bg-black max-md:hover:text-white transition-all">Panier</a></li>
+          <li><a routerLink="/profile" class="md:hidden block py-2 px-3 rounded md:bg-transparent md:p-0 max-md:hover:bg-black max-md:hover:text-white transition-all">Compte</a></li>
+        </ul>
+      </div>
+      <div class="flex-1 max-md:hidden"></div>
+      <div class="flex max-md:hidden space-x-4 items-center">
+        <a routerLink="/cart">
+          <img src="assets/svg/cart.svg" alt="Cart" />
+        </a>
+        <a routerLink="/profile"><img src="assets/svg/user.svg" alt="User" /></a>
+        <p class="cursor-pointer" *ngIf="user" (click)="logout()"><img src="assets/svg/logout.svg" alt="Logout" /></p>
+      </div>
     </div>
-
-    <div class="flex-1"></div>
-
-    <div class="flex space-x-4 items-center max-sm:size-90">
-      <a routerLink="/cart">
-        <img src="assets/svg/cart.svg" alt="Cart" />
-      </a>
-      <a routerLink="/profile"><img src="assets/svg/user.svg" alt="User" /></a>
-      <p class="cursor-pointer" *ngIf="user" (click)="logout()"><img src="assets/svg/logout.svg" alt="Logout" /></p>
-    </div>
-  </div>
+  </nav>
 </header>
