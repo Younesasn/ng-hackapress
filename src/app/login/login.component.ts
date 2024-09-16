@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
       const { username, password } = this.form.value;
       this.authService.login({ username, password }).subscribe(
         (token) => {
+          console.log(token);
           this.authService.saveToken(token);
           this.router.navigate(['/profile']);
         },
