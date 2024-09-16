@@ -7,14 +7,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { authGuard } from './shared/guards/auth.guard';
-import { ContactComponent } from './contact/contact.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ValidateComponent } from './validate/validate.component';
 
 export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'contact', component: ContactComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'payment', component: PaymentComponent },

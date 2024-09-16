@@ -154,7 +154,7 @@ public form: FormGroup = new FormGroup({
     if (selectedCategory && selectedCategory.products.length > 0) {
       const productUrls = selectedCategory.products.map(
         (productUrl) => environment.url + productUrl
-      ); 
+      );
       this.productService
         .getProductsByUrls(productUrls)
         .subscribe((products: Product[]) => {
