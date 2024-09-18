@@ -1,14 +1,16 @@
 <section class="relative pt-36" *ngIf="user">
   <img
-    src="/assets/images/noir.jpg"
+    src="/assets/images/noir.webp"
     alt="cover-image"
+    loading="lazy"
     class="w-full absolute top-0 left-0 z-0 h-60"
   />
   <div class="w-full max-w-7xl mx-auto px-6 md:px-8">
     <div class="flex items-center justify-center relative z-10 mb-2.5">
       <img
-        src="/assets/images/profile.jpg"
+        src="/assets/images/profile.webp"
         alt="user-avatar-image"
+        loading="lazy"
         class="border-solid border-white rounded-full"
       />
     </div>
@@ -176,8 +178,9 @@
               <div class="w-full md:max-w-[126px]">
                 <img
                   [src]="urlImage + item.picture"
-                  [alt]="item.service"
+                  [alt]="item.service + ' image'"
                   class="mx-auto rounded-md"
+                  loading="lazy"
                 />
               </div>
               <div class="grid grid-cols-1 md:grid-cols-4 w-full">

@@ -41,8 +41,9 @@
               class="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5"
             >
               <img
+                loading="lazy"
                 [src]="urlImage + '/' + image"
-                alt="Two each of gray, white, and black shirts arranged on table."
+                [alt]="image"
                 class="object-cover object-center"
               />
             </div>

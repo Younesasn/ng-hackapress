@@ -43,10 +43,10 @@
       <div class="flex-1 max-md:hidden"></div>
       <div class="flex max-md:hidden space-x-4 items-center">
         <a routerLink="/cart">
-          <img src="assets/svg/cart.svg" alt="Cart" />
+          <img src="assets/svg/cart.svg" loading="lazy" alt="Panier" width="24" height="24" />
         </a>
-        <a routerLink="/profile"><img src="assets/svg/user.svg" alt="User" /></a>
-        <p class="cursor-pointer" *ngIf="user" (click)="logout()"><img src="assets/svg/logout.svg" alt="Logout" /></p>
+        <a routerLink="/profile"><img src="assets/svg/user.svg" loading="lazy" alt="User" width="28" height="28" /></a>
+        <p class="cursor-pointer" *ngIf="user" (click)="logout()"><img src="assets/svg/logout.svg" loading="lazy" alt="Se déconnecter" width="24" height="24" /></p>
       </div>
     </div>
   </nav>
