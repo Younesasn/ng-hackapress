@@ -21,9 +21,9 @@ Créez deux fichiers `environment.ts` & `environment.development.ts`, à l'inté
 // environment.development.ts
 export const environment = {
   production: false,
-  apiUrl: 'https://127.0.0.1:8000/api',
-  url: 'https://127.0.0.1:8000',
-  urlImage: 'https://127.0.0.1:8000/uploads/'
+  apiUrl: 'http://127.0.0.1:8000/api',
+  url: 'http://127.0.0.1:8000',
+  urlImage: 'http://127.0.0.1:8000/uploads/'
 };
 ```
 
@@ -31,8 +31,15 @@ export const environment = {
 // environment.ts
 export const environment = {
   production: true,
-  apiUrl: 'https://127.0.0.1:8000/api',
-  url: 'https://127.0.0.1:8000',
-  urlImage: 'https://127.0.0.1:8000/uploads/'
+  apiUrl: 'http://127.0.0.1:8000/api',
+  url: 'http://127.0.0.1:8000',
+  urlImage: 'http://127.0.0.1:8000/uploads/'
 };
 ```
+
+Lancez le projet :
+```bash
+pnpm start
+```
+
+Enjoy !
