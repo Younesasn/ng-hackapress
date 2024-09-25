@@ -15,7 +15,6 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'ng-hackapress';
   user?: User; 
   dataUser!: Subscription;
   userService = inject(UserService);

@@ -2,7 +2,7 @@
 
 !['image'](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white) !['image'](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-Un site de pressing pour les vêtements de qualité et de performance.
+Un site de pressing pour les vêtements de qualité.
 
 Ce projet est le front-end d'[Hacka'Press](<https://hackapress.you-dev.fr>). Pour la partie back-end, voir [sf-hackapress](<https://github.com/Younesasn/sf-hackapress.git>).
 
@@ -39,7 +39,7 @@ export const environment = {
 
 Lancez le projet :
 ```bash
-pnpm start
+pnpm dev
 ```
 
 Enjoy !
