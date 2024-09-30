@@ -8,7 +8,6 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
-import { NavigationService } from '../shared/services/navigation.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +19,6 @@ export class LoginComponent implements OnInit {
   authService = inject(AuthService);
   router = inject(Router);
   error: boolean = false;
-  navigationService = inject(NavigationService);
 
   form: FormGroup = new FormGroup({
     username: new FormControl('', {

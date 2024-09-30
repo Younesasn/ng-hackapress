@@ -23,7 +23,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   civilities!: ApiListResponse<Civility>;
 
   dataCivility!: Subscription;
-  feedback: string = '';
 
   public form = new FormGroup({
     address: new FormControl('', [Validators.required]),
@@ -63,7 +62,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       this.userService.setUser(this.form.value).subscribe({
         next: () => {
-          this.feedback = 'success';
           if (this.form.value.password && this.form.value.username) {
             const { username, password } = this.form.value;
             this.authService.login({ username, password }).subscribe(
@@ -77,9 +75,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
               }
             );
           }
-        },
-        error: () => {
-          this.feedback = 'error';
         },
       });
     }

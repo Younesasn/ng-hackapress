@@ -36,7 +36,6 @@ import { CountUpModule } from 'ngx-countup';
   templateUrl: './modal.component.html',
 })
 export class ModalComponent implements OnChanges, OnInit {
-
   urlImage: string = environment.urlImage;
   filteredProducts: Product[] = [];
   quantity = signal<number>(1);
@@ -54,17 +53,15 @@ export class ModalComponent implements OnChanges, OnInit {
   @Input() services?: Service[];
   @Output() close = new EventEmitter<void>();
 
-public form: FormGroup = new FormGroup({
-  category: new FormControl('', { validators: Validators.required }),
-  product: new FormControl('', { validators: Validators.required }),
-  matter: new FormControl('', { validators: Validators.required }),
-  quantity: new FormControl(1, { validators: Validators.required }),
-  price: new FormControl(0, { validators: Validators.required }),
-});
+  public form: FormGroup = new FormGroup({
+    category: new FormControl('', { validators: Validators.required }),
+    product: new FormControl('', { validators: Validators.required }),
+    matter: new FormControl('', { validators: Validators.required }),
+    quantity: new FormControl(1, { validators: Validators.required }),
+    price: new FormControl(0, { validators: Validators.required }),
+  });
 
-  constructor(
-    private productService: ProductService,
-  ) {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.form.get('quantity')?.valueChanges.subscribe(() => {
@@ -127,7 +124,9 @@ public form: FormGroup = new FormGroup({
       if (
         items.find(
           (item: OneItem) =>
-            item.product === OneItem.product && item.matter === OneItem.matter && item.service === OneItem.service
+            item.product === OneItem.product &&
+            item.matter === OneItem.matter &&
+            item.service === OneItem.service
         )
       ) {
         items.find(
