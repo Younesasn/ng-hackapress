@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ApiListResponse, OneItem, Order, Payment } from '../shared/entities';
-import { Subscription, last } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { PaymentService } from '../shared/services/payment.service';
 import { CommonModule } from '@angular/common';
 import { OrderService } from '../shared/services/order.service';
@@ -42,7 +42,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
-    if(!localStorage.getItem('cart')){
+    if (!localStorage.getItem('cart')) {
       this.router.navigate(['/cart']);
     }
     this.fetchPayments();
@@ -70,44 +70,44 @@ export class PaymentComponent implements OnInit, OnDestroy {
     );
   }
 
-validate() {
-  if (this.form.valid) {
-    const user_id = this.authService.getDecodedToken().user_id;
-  
-    if (this.cart.length > 0) {
-      const order: Order = {
-        date: new Date().toISOString(),
-        totalPrice: this.totalPrice(),
-        customer: `/api/users/${user_id}`,
-        payment: `/api/payments/${this.form.value.paymentMethod}`,
-        deposit: this.form.value.deposit?.toString(),
-        items: [],
-      };
+  validate() {
+    if (this.form.valid) {
+      const user_id = this.authService.getDecodedToken().user_id;
 
-      this.orderService.setOrder(order).subscribe((order: Order) => {
-        const items: OneItem[] = this.cart.map((item: OneItem) => {
-          return {
-            command: `/api/orders/${order.id}`,
-            product: item.product,
-            matter: item.matter,
-            service: item.service,
-            quantity: item.quantity,
-            picture: item.picture,
-          };
-        });
+      if (this.cart.length > 0) {
+        const order: Order = {
+          date: new Date().toISOString(),
+          totalPrice: this.totalPrice(),
+          customer: `/api/users/${user_id}`,
+          payment: `/api/payments/${this.form.value.paymentMethod}`,
+          deposit: this.form.value.deposit?.toString(),
+          items: [],
+        };
 
-        items.forEach((item: OneItem) => {
-          this.itemService.setItem(item).subscribe();
+        this.orderService.setOrder(order).subscribe((order: Order) => {
+          const items: OneItem[] = this.cart.map((item: OneItem) => {
+            return {
+              command: `/api/orders/${order.id}`,
+              product: item.product,
+              matter: item.matter,
+              service: item.service,
+              quantity: item.quantity,
+              picture: item.picture,
+            };
+          });
+
+          items.forEach((item: OneItem) => {
+            this.itemService.setItem(item).subscribe();
+          });
         });
-      });
-      localStorage.removeItem('cart');
-      localStorage.setItem('order', JSON.stringify(true));
-      this.router.navigate(['/validate']);
-    } else {
-      console.log('Cart is empty');
+        localStorage.removeItem('cart');
+        localStorage.setItem('order', JSON.stringify(true));
+        this.router.navigate(['/validate']);
+      } else {
+        console.log('Cart is empty');
+      }
     }
   }
-}
 
   ngOnDestroy(): void {
     this.dataPayment.unsubscribe();
