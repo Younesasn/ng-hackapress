@@ -65,6 +65,7 @@ export class CartComponent implements OnInit, OnDestroy {
     if (this.cart.length > 1) {
       this.cart = this.cart.filter((cartItem) => cartItem !== item);
       localStorage.setItem('cart', JSON.stringify(this.cart));
+      this.total = this.cart.reduce((acc, item) => acc + item.price, 0);
     } else {
       this.cart = [];
       localStorage.removeItem('cart');
