@@ -15,7 +15,7 @@
           <button
             type="button"
             (click)="closeModal()"
-            class="absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8"
+            class="absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8 focus:ring-black focus:border-black"
           >
             <span class="sr-only">Close</span>
             <svg
@@ -60,7 +60,9 @@
                   Service information
                 </h3>
 
-                <p class="text-2xl text-gray-900">A partir de {{ service.price }} €</p>
+                <p class="text-2xl text-gray-900">
+                  A partir de {{ service.price }} €
+                </p>
                 <p class="text-sm">
                   {{ service.description }}
                 </p>
@@ -74,72 +76,29 @@
                   [formGroup]="form"
                   (submit)="addServiceItem()"
                 >
-                  <!-- Select Category Product -->
-                  <div class="flex justify-between md:space-x-10">
-                    <!-- <div class="space-y-2">
-                      <label for="category">Catégorie</label>
-                      <select
-                        id="category"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        (change)="onCategoryChange($event)"
-                        formControlName="category"
+                  <div class="space-y-2">
+                    <label for="product">Produit</label>
+                    <select
+                      formControlName="product"
+                      id="product"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
+                    >
+                      <option value="" disabled selected>
+                        Selectionnez un produit
+                      </option>
+                      <ng-container
+                        *ngFor="let productCategory of categoryProducts"
                       >
-                        <option [value]="" disabled selected>
-                          Selectionnez une catégorie
-                        </option>
-                        <option
-                          *ngFor="let categoryProduct of categoryProducts"
-                          [value]="categoryProduct.id"
-                        >
-                          {{ categoryProduct.name }}
-                        </option>
-                      </select>
-                    </div> -->
-                    <!-- Select Product -->
-
-                    <!-- <div class="space-y-2">
-                      <label for="product">Produit</label>
-                      <select
-                        id="product"
-                        class="bg-gray-50 border border-gray-300 text-gray-900"
-                        formControlName="product"
-                      >
-                        <option value="" disabled selected>
-                          Selectionnez un produit
-                        </option>
-                        <option
-                          *ngFor="let product of filteredProducts"
-                          [value]="toString(product)"
-                        >
-                          {{ product.name }}
-                        </option>
-                      </select>
-                    </div> -->
-
-                    <div class="space-y-2">
-                      <label for="product">Produit</label>
-                      <select
-                        formControlName="product"
-                        id="product"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-md"
-                      >
-                        <option value="" disabled selected>
-                          Selectionnez un produit
-                        </option>
-                        <ng-container
-                          *ngFor="let productCategory of categoryProducts"
-                        >
-                          <optgroup label="{{ productCategory.name }}">
-                            <option
-                              *ngFor="let product of productCategory.products"
-                              [value]="toString(product)"
-                            >
-                              {{ product.name }}
-                            </option>
-                          </optgroup>
-                        </ng-container>
-                      </select>
-                    </div>
+                        <optgroup label="{{ productCategory.name }}">
+                          <option
+                            *ngFor="let product of productCategory.products"
+                            [value]="toString(product)"
+                          >
+                            {{ product.name }}
+                          </option>
+                        </optgroup>
+                      </ng-container>
+                    </select>
                   </div>
 
                   <div class="space-y-2">
@@ -147,7 +106,7 @@
                     <select
                       name=""
                       id="matter"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
                       formControlName="matter"
                       (change)="calculatePrice()"
                     >
@@ -170,7 +129,7 @@
                         <button
                           type="button"
                           (click)="moins()"
-                          class="h-10 w-10 bg-black text-white rounded-full transition-all shadow-md hover:shadow-black/60"
+                          class="h-10 w-10 bg-black text-white rounded-full transition-all shadow-md hover:shadow-black/60 focus:ring-black focus:border-black"
                         >
                           -
                         </button>
@@ -183,7 +142,7 @@
                         <button
                           type="button"
                           (click)="plus()"
-                          class="h-10 w-10 bg-black text-white rounded-full transition-all shadow-md hover:shadow-black/60"
+                          class="h-10 w-10 bg-black text-white rounded-full transition-all shadow-md hover:shadow-black/60 focus:ring-black focus:border-black"
                         >
                           +
                         </button>
