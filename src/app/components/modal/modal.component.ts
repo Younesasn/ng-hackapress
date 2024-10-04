@@ -41,12 +41,8 @@ export class ModalComponent implements OnChanges, OnInit {
   quantity = signal<number>(1);
   evolutedPrice!: Signal<number>;
 
-  @Input() name!: string;
-  @Input() description!: string;
-  @Input() image!: string;
-  @Input() id!: number;
+  @Input() service!: Service;
   @Input() matters!: Matter[];
-  @Input() price!: number;
   @Input() categoryServices?: ServiceCategory[];
   @Input() categoryProducts?: ProductCategory[];
   @Input() products?: Product[];
@@ -54,7 +50,7 @@ export class ModalComponent implements OnChanges, OnInit {
   @Output() close = new EventEmitter<void>();
 
   public form: FormGroup = new FormGroup({
-    category: new FormControl('', { validators: Validators.required }),
+    // category: new FormControl('', { validators: Validators.required }),
     product: new FormControl('', { validators: Validators.required }),
     matter: new FormControl('', { validators: Validators.required }),
     quantity: new FormControl(1, { validators: Validators.required }),
@@ -67,7 +63,7 @@ export class ModalComponent implements OnChanges, OnInit {
     this.form.get('quantity')?.valueChanges.subscribe(() => {
       this.calculatePrice();
     });
-    this.evolutedPrice = computed(() => this.price * this.quantity());
+    this.evolutedPrice = computed(() => this.service.price * this.quantity());
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -96,26 +92,30 @@ export class ModalComponent implements OnChanges, OnInit {
     this.form.get('price')?.setValue(this.evolutedPrice);
   }
 
+  toString(value: any) {
+    return JSON.stringify(value);
+  }
+
   addServiceItem() {
     this.form.get('quantity')?.setValue(this.quantity().valueOf());
     this.form.get('price')?.setValue(this.evolutedPrice().valueOf());
 
     if (
-      this.form.get('category')?.value === '' ||
       this.form.get('product')?.value === '' ||
       this.form.get('matter')?.value === ''
     ) {
       throw new Error('Veuillez remplir tous les champs');
     }
+    
+    const service = JSON.stringify(this.service);
 
     let OneItem: OneItem = {
-      service: `/api/services/${this.id}`,
-      category: `/api/categories/${this.form.get('category')?.value}`,
-      product: this.form.get('product')?.value,
-      matter: this.form.get('matter')?.value,
+      service: JSON.parse(service),
+      product: JSON.parse(this.form.get('product')?.value),
+      matter: JSON.parse(this.form.get('matter')?.value),
       quantity: this.form.get('quantity')?.value,
       price: this.form.get('price')?.value,
-      picture: this.image,
+      picture: this.service.picture,
     };
 
     // Si cart existe déjà dans le localStorage

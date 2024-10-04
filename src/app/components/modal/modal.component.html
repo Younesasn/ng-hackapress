@@ -42,14 +42,14 @@
             >
               <img
                 loading="lazy"
-                [src]="urlImage + '/' + image"
-                [alt]="image"
+                [src]="urlImage + '/' + service.picture"
+                [alt]="service.picture"
                 class="object-cover object-center"
               />
             </div>
             <div class="sm:col-span-8 lg:col-span-7">
               <h2 class="text-2xl font-bold text-gray-900 sm:pr-12">
-                {{ name }}
+                {{ service.name }}
               </h2>
 
               <section
@@ -60,11 +60,9 @@
                   Service information
                 </h3>
 
-                <p class="text-2xl text-gray-900">
-                  A partir de {{ price }} €
-                </p>
+                <p class="text-2xl text-gray-900">A partir de {{ service.price }} €</p>
                 <p class="text-sm">
-                  {{ description }}
+                  {{ service.description }}
                 </p>
               </section>
 
@@ -78,7 +76,7 @@
                 >
                   <!-- Select Category Product -->
                   <div class="flex justify-between md:space-x-10">
-                    <div class="space-y-2">
+                    <!-- <div class="space-y-2">
                       <label for="category">Catégorie</label>
                       <select
                         id="category"
@@ -96,14 +94,14 @@
                           {{ categoryProduct.name }}
                         </option>
                       </select>
-                    </div>
+                    </div> -->
                     <!-- Select Product -->
 
-                    <div class="space-y-2">
+                    <!-- <div class="space-y-2">
                       <label for="product">Produit</label>
                       <select
                         id="product"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 "
+                        class="bg-gray-50 border border-gray-300 text-gray-900"
                         formControlName="product"
                       >
                         <option value="" disabled selected>
@@ -111,10 +109,35 @@
                         </option>
                         <option
                           *ngFor="let product of filteredProducts"
-                          value="/api/products/{{ product.id }}"
+                          [value]="toString(product)"
                         >
                           {{ product.name }}
                         </option>
+                      </select>
+                    </div> -->
+
+                    <div class="space-y-2">
+                      <label for="product">Produit</label>
+                      <select
+                        formControlName="product"
+                        id="product"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 rounded-md"
+                      >
+                        <option value="" disabled selected>
+                          Selectionnez un produit
+                        </option>
+                        <ng-container
+                          *ngFor="let productCategory of categoryProducts"
+                        >
+                          <optgroup label="{{ productCategory.name }}">
+                            <option
+                              *ngFor="let product of productCategory.products"
+                              [value]="toString(product)"
+                            >
+                              {{ product.name }}
+                            </option>
+                          </optgroup>
+                        </ng-container>
                       </select>
                     </div>
                   </div>
@@ -128,12 +151,12 @@
                       formControlName="matter"
                       (change)="calculatePrice()"
                     >
-                      <option [value]="" disabled selected>
+                      <option value="" disabled selected>
                         Selectionnez une matière
                       </option>
                       <option
                         *ngFor="let matter of matters"
-                        value="/api/matters/{{ matter.id }}"
+                        [value]="toString(matter)"
                       >
                         {{ matter.name }}
                       </option>
@@ -168,7 +191,9 @@
                     </div>
 
                     <div class="flex justify-between space-x-1">
-                      <span>Total : </span><h2 [countUp]="evolutedPrice()"></h2><span> €</span>
+                      <span>Total : </span>
+                      <h2 [countUp]="evolutedPrice()"></h2>
+                      <span> €</span>
                     </div>
                   </div>
 

@@ -6,6 +6,12 @@ export interface ApiListResponse<T> {
   'hydra:member': T[];
 }
 
+export interface ApiResponse {
+  '@context'?: string;
+  '@id'?: string;
+  '@type'?: string;
+}
+
 export interface User {
   id: number;
   email: string;
@@ -57,10 +63,10 @@ export interface Item {
 
 export interface OneItem {
   id?: number;
-  service: string;
-  category: string;
-  product: string;
-  matter: string;
+  service: Service;
+  category?: string;
+  product: Product;
+  matter: Matter;
   quantity: number;
   price: number;
   picture: string;
@@ -74,7 +80,7 @@ export interface Payment {
   orders: Order[];
 }
 
-export interface Order {
+export interface Order extends ApiResponse {
   id?: number;
   date: string;
   deposit?: string;
@@ -90,7 +96,7 @@ export interface Civility {
   users: User[];
 }
 
-export interface Product {
+export interface Product extends ApiResponse {
   id: number;
   category: ProductCategory;
   name: string;
@@ -107,7 +113,7 @@ export interface ProductCategory {
   products: Product[];
 }
 
-export interface Service {
+export interface Service extends ApiResponse {
   id: number;
   category: ServiceCategory;
   name: string;
@@ -136,7 +142,7 @@ export interface Employee {
   category: ServiceCategory;
 }
 
-export interface Matter {
+export interface Matter extends ApiResponse {
   id: number;
   name: string;
   coeff: number;

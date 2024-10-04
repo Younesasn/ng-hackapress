@@ -87,10 +87,10 @@ export class PaymentComponent implements OnInit, OnDestroy {
         this.orderService.setOrder(order).subscribe((order: Order) => {
           const items: OneItem[] = this.cart.map((item: OneItem) => {
             return {
-              command: `/api/orders/${order.id}`,
-              product: item.product,
-              matter: item.matter,
-              service: item.service,
+              command: order['@id'],
+              product: item.product['@id'],
+              matter: item.matter['@id'],
+              service: item.service['@id'],
               quantity: item.quantity,
               picture: item.picture,
             };

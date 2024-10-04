@@ -6,7 +6,6 @@ import { CartService } from '../shared/services/cart.service';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../shared/services/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { forkJoin, map } from 'rxjs';
 import { ValidateComponent } from '../validate/validate.component';
 
 @Component({
@@ -30,34 +29,6 @@ export class CartComponent implements OnInit, OnDestroy {
     if (localStorage.getItem('cart')) {
       this.cart = JSON.parse(localStorage.getItem('cart') || '[]');
       this.total = this.cart.reduce((acc, item) => acc + item.price, 0);
-    }
-    this.updateCartItem();
-  }
-
-  updateCartItem() {
-    if (this.cart) {
-      const requests = this.cart.map((item) => {
-        const matterRequest = this.http.get<any>(environment.url + item.matter);
-        const productRequest = this.http.get<any>(
-          environment.url + item.product
-        );
-        const serviceRequest = this.http.get<any>(
-          environment.url + item.service
-        );
-
-        return forkJoin([matterRequest, productRequest, serviceRequest]).pipe(
-          map(([matter, product, service]) => {
-            item.matter = matter.name;
-            item.product = product.name;
-            item.service = service.name;
-            return item;
-          })
-        );
-      });
-
-      forkJoin(requests).subscribe((updatedCart: OneItem[]) => {
-        this.cart = updatedCart;
-      });
     }
   }
 

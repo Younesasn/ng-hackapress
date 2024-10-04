@@ -16,11 +16,7 @@
 
 <app-modal
   *ngIf="selectedService"
-  [name]="selectedService.name"
-  [description]="selectedService.description"
-  [image]="selectedService.picture"
-  [id]="selectedService.id"
-  [price]="selectedService.price"
+  [service]="selectedService"
   [categoryProducts]="productCategory"
   [matters]="matters"
   (close)="closeModal()"
