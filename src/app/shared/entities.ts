@@ -85,7 +85,6 @@ export interface Order extends ApiResponse {
   date: string;
   deposit?: string;
   totalPrice: number;
-  customer: string;
   payment: string;
   items: Item[];
 }
