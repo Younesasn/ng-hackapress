@@ -9,7 +9,7 @@ import { AuthService } from '../shared/services/auth.service';
   selector: 'app-header',
   standalone: true,
   templateUrl: './header.component.html',
-  imports: [RouterLink, ButtonComponent, CommonModule],
+  imports: [RouterLink, CommonModule],
 })
 export class HeaderComponent {
   @Input() user?: User;

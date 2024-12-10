@@ -1,16 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { Product, Service } from '../../shared/entities';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from "../button/button.component";
 import { environment } from '../../../environments/environment';
 
 @Component({
-    selector: 'app-card',
-    standalone: true,
-    templateUrl: './card.component.html',
-    styleUrl: './card.component.css',
-    imports: [RouterLink, CommonModule, ButtonComponent]
+  selector: 'app-card',
+  standalone: true,
+  templateUrl: './card.component.html',
+  imports: [CommonModule],
 })
 export class CardComponent {
   urlImage: string = environment.urlImage;

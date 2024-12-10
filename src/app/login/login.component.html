@@ -1,10 +1,10 @@
 <section class="flex">
   <div
-    class="max-xl:hidden flex h-screen w-[800px] items-center bg-cover bg-center bg-no-repeat rounded-r-2xl shadow-2xl"
+    class="flex h-screen w-[800px] items-center rounded-r-2xl bg-cover bg-center bg-no-repeat shadow-2xl max-xl:hidden"
     [style.backgroundImage]="'url(/assets/images/login.webp)'"
   ></div>
   <div
-    class="flex max-w-screen-xl max-lg:max-w-screen-md max-xl:h-[800px] max-md:max-w-screen-sm lg:p-6 p-3 m-auto items-center"
+    class="m-auto flex max-w-screen-xl items-center p-3 max-xl:h-[800px] max-lg:max-w-screen-md max-md:max-w-screen-sm lg:p-6"
   >
     <div class="">
       <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -16,8 +16,8 @@
       </div>
 
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <div class="flex justify-center mb-3">
-          <p class="text-sm text-red-400 font-extralight" *ngIf="error">
+        <div class="mb-3 flex justify-center">
+          <p class="text-sm font-extralight text-red-400" *ngIf="error">
             Nom d'utilisateur ou mot de passe incorrect
           </p>
         </div>

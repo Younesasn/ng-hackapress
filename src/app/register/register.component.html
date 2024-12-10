@@ -1,6 +1,6 @@
 <section class="flex">
   <div
-    class="flex max-w-screen-xl max-lg:max-w-screen-md max-xl:h-[900px] max-md:max-w-screen-sm m-auto max-xl:py-6 items-center"
+    class="m-auto flex max-w-screen-xl items-center max-xl:h-[900px] max-xl:py-6 max-lg:max-w-screen-md max-md:max-w-screen-sm"
   >
     <div class="w-[400px] justify-between">
       <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -23,7 +23,7 @@
               <select
                 id="civility"
                 formControlName="civility"
-                class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
                 *ngIf="civilities"
               >
                 <option value="" disabled selected>
@@ -50,7 +50,7 @@
                   id="lastname"
                   autocomplete="lastname"
                   formControlName="lastname"
-                  class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                  class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
                   placeholder="Doe"
                   required
                 />
@@ -66,7 +66,7 @@
                   id="firstname"
                   autocomplete="firstname"
                   formControlName="firstname"
-                  class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                  class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
                   placeholder="John"
                   required
                 />
@@ -84,7 +84,7 @@
                 id="username"
                 autocomplete="username"
                 formControlName="username"
-                class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
                 placeholder="johnDoe"
                 required
               />
@@ -101,7 +101,7 @@
                 id="password"
                 autocomplete="password"
                 formControlName="password"
-                class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
                 placeholder="•••••••••"
                 required
               />
@@ -140,7 +140,7 @@
                 id="address"
                 autocomplete="address"
                 formControlName="address"
-                class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                class="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
                 placeholder="7 rue du parc 75012 Paris"
                 required
               />
@@ -177,7 +177,7 @@
     </div>
   </div>
   <div
-    class="max-xl:hidden flex h-screen w-[800px] items-center bg-cover bg-center bg-no-repeat rounded-l-2xl shadow-2xl"
+    class="flex h-screen w-[800px] items-center rounded-l-2xl bg-cover bg-center bg-no-repeat shadow-2xl max-xl:hidden"
     [style.backgroundImage]="'url(/assets/images/register.webp)'"
   ></div>
 </section>

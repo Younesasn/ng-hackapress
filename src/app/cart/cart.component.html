@@ -23,34 +23,34 @@
 
 <section
   *ngIf="cart"
-  class="max-w-screen-xl max-lg:max-w-screen-md max-md:max-w-screen-sm lg:px-6 px-3 py-3 m-auto"
+  class="m-auto max-w-screen-xl px-3 py-3 max-lg:max-w-screen-md max-md:max-w-screen-sm lg:px-6"
 >
-  <div class="flex justify-center items-center">
-    <h1 class="text-5xl font-semibold p-5">Panier</h1>
+  <div class="flex items-center justify-center">
+    <h1 class="p-5 text-5xl font-semibold">Panier</h1>
   </div>
-  <div class="flex gap-6 max-lg:flex-col mt-8">
-    <div class="flex flex-[2] w-full">
+  <div class="mt-8 flex gap-6 max-lg:flex-col">
+    <div class="flex w-full flex-[2]">
       <!-- Card -->
       <div
-        class="col-span-12 xl:col-span-8 lg:pr-8 pb-8 w-full max-xl:max-w-3xl max-xl:mx-auto"
+        class="col-span-12 w-full pb-8 max-xl:mx-auto max-xl:max-w-3xl lg:pr-8 xl:col-span-8"
       >
         <div
-          class="grid grid-cols-12 max-md:hidden pb-6 border-b border-gray-200"
+          class="grid grid-cols-12 border-b border-gray-200 pb-6 max-md:hidden"
         >
           <div class="col-span-12 md:col-span-7">
-            <p class="font-normal text-lg leading-8 text-gray-400">Service</p>
+            <p class="text-lg font-normal leading-8 text-gray-400">Service</p>
           </div>
           <div class="col-span-12 md:col-span-5">
             <div class="grid grid-cols-5">
               <div class="col-span-3">
                 <p
-                  class="font-normal text-lg leading-8 text-gray-400 text-center"
+                  class="text-center text-lg font-normal leading-8 text-gray-400"
                 >
                   Quantité
                 </p>
               </div>
               <div class="col-span-2">
-                <p class="font-normal text-lg leading-8 text-gray-400 text-end">
+                <p class="text-end text-lg font-normal leading-8 text-gray-400">
                   Total
                 </p>
               </div>
@@ -59,7 +59,7 @@
         </div>
         <div
           *ngFor="let item of cart"
-          class="flex flex-col min-[500px]:flex-row min-[500px]:items-center gap-5 py-6 border-b border-gray-200 group"
+          class="group flex flex-col gap-5 border-b border-gray-200 py-6 min-[500px]:flex-row min-[500px]:items-center"
         >
           <div class="w-full md:max-w-[126px]">
             <img
@@ -69,42 +69,49 @@
               loading="lazy"
             />
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-4 w-full">
+          <div class="grid w-full grid-cols-1 md:grid-cols-4">
             <div class="md:col-span-2">
-              <div class="flex flex-col max-[500px]:items-center gap-3 max-sm:text-center">
-                <h6 class="font-semibold text-base leading-7 text-black">
+              <div
+                class="flex flex-col gap-3 max-sm:text-center max-[500px]:items-center"
+              >
+                <h6 class="text-base font-semibold leading-7 text-black">
                   {{ item.service.name }}
                 </h6>
                 <ul>
-                  <li class="font-normal text-base text-gray-500">
+                  <li class="text-base font-normal text-gray-500">
                     {{ item.product.name }}
                   </li>
-                  <li class="font-normal text-sm text-gray-500">
+                  <li class="text-sm font-normal text-gray-500">
                     {{ item.matter.name }}
                   </li>
                 </ul>
                 <h6
-                  class="font-medium text-base leading-7 text-gray-600 transition-all duration-300"
+                  class="text-base font-medium leading-7 text-gray-600 transition-all duration-300"
                 >
-                  {{ item.price / item.quantity | currency : "EUR" }}
+                  {{ item.price / item.quantity | currency: "EUR" }}
                 </h6>
-                <div class="cursor-pointer underline decoration-solid font-normal text-sm text-gray-400" (click)="deleteItem(item)">Supprimer</div>
+                <div
+                  class="cursor-pointer text-sm font-normal text-gray-400 underline decoration-solid"
+                  (click)="deleteItem(item)"
+                >
+                  Supprimer
+                </div>
               </div>
             </div>
             <div
-              class="flex items-center max-[500px]:justify-center h-full max-md:mt-3 justify-center"
+              class="flex h-full items-center justify-center max-md:mt-3 max-[500px]:justify-center"
             >
-              <div class="flex items-center h-full">
+              <div class="flex h-full items-center">
                 {{ item.quantity }}
               </div>
             </div>
             <div
-              class="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full"
+              class="flex h-full items-center max-md:mt-3 max-[500px]:justify-center md:justify-end"
             >
               <p
-                class="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300"
+                class="text-center text-lg font-bold leading-8 text-gray-600 transition-all duration-300"
               >
-                {{ item.price | currency : "EUR" }}
+                {{ item.price | currency: "EUR" }}
               </p>
             </div>
           </div>
@@ -113,15 +120,11 @@
     </div>
     <div class="mt-6 w-full space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md">
       <div class="flow-root">
-        <div
-          class="-my-3 divide-y divide-text-zinc-200"
-        >
+        <div class="divide-text-zinc-200 -my-3 divide-y">
           <dl class="flex items-center justify-between gap-4 py-3">
-            <dt class="text-base font-normal text-zinc-500">
-              Sous-total
-            </dt>
+            <dt class="text-base font-normal text-zinc-500">Sous-total</dt>
             <dd class="text-base font-medium text-zinc-900">
-              {{ total | currency : "EUR" }}
+              {{ total | currency: "EUR" }}
             </dd>
           </dl>
 
@@ -130,16 +133,14 @@
               Frais de service
             </dt>
             <dd class="text-base font-medium text-zinc-900">
-              {{ taxes | currency : "EUR" }}
+              {{ taxes | currency: "EUR" }}
             </dd>
           </dl>
 
           <dl class="flex items-center justify-between gap-4 py-3">
-            <dt class="text-base font-bold text-zinc-900">
-              Total
-            </dt>
+            <dt class="text-base font-bold text-zinc-900">Total</dt>
             <dd class="text-base font-bold text-zinc-900">
-              {{ total + taxes | currency : "EUR" }}
+              {{ total + taxes | currency: "EUR" }}
             </dd>
           </dl>
         </div>

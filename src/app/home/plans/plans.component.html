@@ -1,24 +1,32 @@
 <section>
   <div
-    class="max-w-screen-xl max-lg:max-w-screen-md max-md:max-w-screen-sm lg:px-6 px-3 m-auto h-[1600px] xl:h-[700px] flex justify-center"
+    class="m-auto flex h-[1600px] max-w-screen-xl justify-center px-3 max-lg:max-w-screen-md max-md:max-w-screen-sm lg:px-6 xl:h-[700px]"
   >
     <div class="space-y-14">
       <div class="space-y-6">
-        <div class="flex space-x-4 justify-center">
-          <img src="/assets/svg/star.svg" alt="Étoile" loading="lazy" width="15" height="20" />
+        <div class="flex justify-center space-x-4">
+          <img
+            src="/assets/svg/star.svg"
+            alt="Étoile"
+            loading="lazy"
+            width="15"
+            height="20"
+          />
           <p class="text-sm">TARIFICATIONS</p>
         </div>
-        <div class="flex space-y-4 justify-center">
+        <div class="flex justify-center space-y-4">
           <h2 class="text-5xl max-lg:text-4xl">Nos Services</h2>
         </div>
-        <div class="flex space-y-4 text-center justify-center">
+        <div class="flex justify-center space-y-4 text-center">
           <p>
-            Découvrez nos services personnalisés, conçus pour prendre soin de vos vêtements avec expertise et attention, afin de vous offrir une tranquillité d'esprit totale.
+            Découvrez nos services personnalisés, conçus pour prendre soin de
+            vos vêtements avec expertise et attention, afin de vous offrir une
+            tranquillité d'esprit totale.
           </p>
         </div>
       </div>
       <div
-        class="flex space-x-4 max-lg:space-y-8 max-lg:space-x-0 max-lg:grid max-lg:grid-rows-3 max-lg:justify-center"
+        class="flex space-x-4 max-lg:grid max-lg:grid-rows-3 max-lg:justify-center max-lg:space-x-0 max-lg:space-y-8"
       >
         <div
           *ngFor="let oneServiceCategory of serviceCategory; let i = index"
@@ -28,10 +36,11 @@
         >
           <div class="flex space-x-4">
             <img
-              src="/assets/svg/star{{
-                i % 2 === 0 ? '-white' : ''
-              }}.svg"
-              alt="Étoile" width="15" height="20" loading="lazy"
+              src="/assets/svg/star{{ i % 2 === 0 ? '-white' : '' }}.svg"
+              alt="Étoile"
+              width="15"
+              height="20"
+              loading="lazy"
             />
             <p class="text-lg font-semibold">{{ oneServiceCategory.name }}</p>
           </div>

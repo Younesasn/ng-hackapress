@@ -1,5 +1,5 @@
 <div
-  class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+  class="fixed inset-0 h-full w-full overflow-y-auto bg-gray-600 bg-opacity-50"
   id="my-modal"
 >
   <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
@@ -15,7 +15,7 @@
           <button
             type="button"
             (click)="closeModal()"
-            class="absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8 focus:ring-black focus:border-black"
+            class="absolute right-4 top-4 text-gray-400 hover:text-gray-500 focus:border-black focus:ring-black sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8"
           >
             <span class="sr-only">Close</span>
             <svg
@@ -81,7 +81,7 @@
                     <select
                       formControlName="product"
                       id="product"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
+                      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-black focus:ring-black"
                     >
                       <option value="" disabled selected>
                         Selectionnez un produit
@@ -106,7 +106,7 @@
                     <select
                       name=""
                       id="matter"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
+                      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-black focus:ring-black"
                       formControlName="matter"
                       (change)="calculatePrice()"
                     >
@@ -122,14 +122,14 @@
                     </select>
                   </div>
 
-                  <div class="flex justify-between items-center">
+                  <div class="flex items-center justify-between">
                     <div class="space-y-2">
                       <label for="quantity">Quantité</label>
                       <div class="flex space-x-1">
                         <button
                           type="button"
                           (click)="moins()"
-                          class="h-10 w-10 bg-black text-white rounded-full transition-all shadow-md hover:shadow-black/60 focus:ring-black focus:border-black"
+                          class="h-10 w-10 rounded-full bg-black text-white shadow-md transition-all hover:shadow-black/60 focus:border-black focus:ring-black"
                         >
                           -
                         </button>
@@ -137,12 +137,12 @@
                           type="text"
                           [value]="quantity()"
                           formControlName="quantity"
-                          class="border-none text-center w-12"
+                          class="w-12 border-none text-center"
                         />
                         <button
                           type="button"
                           (click)="plus()"
-                          class="h-10 w-10 bg-black text-white rounded-full transition-all shadow-md hover:shadow-black/60 focus:ring-black focus:border-black"
+                          class="h-10 w-10 rounded-full bg-black text-white shadow-md transition-all hover:shadow-black/60 focus:border-black focus:ring-black"
                         >
                           +
                         </button>
@@ -157,10 +157,10 @@
                   </div>
 
                   <!-- Button -->
-                  <div class="flex w-full items-center justify-end mt-5">
+                  <div class="mt-5 flex w-full items-center justify-end">
                     <button
                       type="submit"
-                      class="p-4 bg-black text-white rounded-full transition-all shadow-md hover:shadow-black/60"
+                      class="rounded-full bg-black p-4 text-white shadow-md transition-all hover:shadow-black/60"
                     >
                       Ajouter
                     </button>
