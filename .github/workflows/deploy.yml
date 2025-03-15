@@ -8,16 +8,6 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          version: 9
-
       - name: execute ssh cmd
         uses: appleboy/ssh-action@v1.2.0
         with:
@@ -28,4 +18,4 @@ jobs:
             cd /var/www/html/ng-hackapress
             git pull
             rm -rf .angular
-            pnpm install && pnpm build
+            npm install && npm build
