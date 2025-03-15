@@ -16,6 +16,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/www/html/ng-hackapress
-            git pull origin master --rebase
+            git pull
             rm -rf .angular
-            pnpm install && pnpm build
+            pi && pb
