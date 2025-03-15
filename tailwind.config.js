@@ -2,7 +2,9 @@
 module.exports = {
   content: ["./src/**/*.{html,ts}", "./node_modules/flowbite/**/*.js"],
   theme: {
-    fontFamily: { urbanist: ["Urbanist"] },
+    fontFamily: { 
+      urbanist: ["Urbanist"]
+    },
     extend: {},
   },
   plugins: [
