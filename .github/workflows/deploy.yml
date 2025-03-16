@@ -19,4 +19,4 @@ jobs:
             git pull origin master
             ng cache clean
             rm -rf node_modules package-lock.json
-            pnpm install --frozen-lockfile && pnpm build --prod
+            npm install && ng build
