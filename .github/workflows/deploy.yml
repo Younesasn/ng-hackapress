@@ -17,6 +17,6 @@ jobs:
           script: |
             cd /var/www/html/ng-hackapress
             git pull origin master
-            ng cache clean --force
+            ng cache clean
             rm -rf node_modules package-lock.json
-            npm install && ng build --prod
+            npm install && ng build
